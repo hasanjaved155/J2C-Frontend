@@ -1,0 +1,219 @@
+[{
+  "_id": {
+    "$oid": "65fc255c2f352d5b61cf0b98"
+  },
+  "subCategoryName": "Web Development",
+  "subsubcategories": [
+    {
+      "$oid": "65fc3a52aae1ee160dd30fa4"
+    },
+    {
+      "$oid": "65fdda91e45ffe283f3dfade"
+    },
+    {
+      "$oid": "65fddfa248364d1a637ce26d"
+    },
+    {
+      "$oid": "6602c0da4f0396ff5ef72a3e"
+    },
+    {
+      "$oid": "6602c0e24f0396ff5ef72a41"
+    },
+    {
+      "$oid": "6602c12f4f0396ff5ef72a4e"
+    },
+    {
+      "$oid": "6602c1384f0396ff5ef72a51"
+    },
+    {
+      "$oid": "6602c13f4f0396ff5ef72a54"
+    }
+  ],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "65fc3aabaae1ee160dd30faa"
+  },
+  "subCategoryName": "Entrepreneurship",
+  "subsubcategories": [
+    {
+      "$oid": "65fc3adaaae1ee160dd30faf"
+    }
+  ],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "65fc6ef91bb5cf932a814171"
+  },
+  "subCategoryName": "Career Talk",
+  "subsubcategories": [
+    {
+      "$oid": "65fddbc1e45ffe283f3dfb40"
+    }
+  ],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "65fde31848364d1a637ce2a6"
+  },
+  "subCategoryName": "IT Certifications",
+  "subsubcategories": [
+    {
+      "$oid": "65fde34b48364d1a637ce2bc"
+    }
+  ],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "65fecbec13f8eb0ea8444934"
+  },
+  "subCategoryName": "Data Science",
+  "subsubcategories": [
+    {
+      "$oid": "65fecc5413f8eb0ea8444954"
+    },
+    {
+      "$oid": "6644d3390ec8650cc41bea57"
+    },
+    {
+      "$oid": "6644d3440ec8650cc41bea5a"
+    },
+    {
+      "$oid": "6644d3580ec8650cc41bea5d"
+    },
+    {
+      "$oid": "6644d3640ec8650cc41bea60"
+    },
+    {
+      "$oid": "6644d36d0ec8650cc41bea63"
+    },
+    {
+      "$oid": "6644d37d0ec8650cc41bea66"
+    }
+  ],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6605c2bc5dfe1e0e27170f63"
+  },
+  "subCategoryName": "Salesforce",
+  "subsubcategories": [],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "66198ded5dfe1e0e271752dd"
+  },
+  "subCategoryName": "songs",
+  "subsubcategories": [
+    {
+      "$oid": "66198e1b5dfe1e0e271752e3"
+    }
+  ],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6644d2190ec8650cc41be9e5"
+  },
+  "subCategoryName": "Web Design",
+  "subsubcategories": [],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6644d2350ec8650cc41be9ff"
+  },
+  "subCategoryName": "Design Tools",
+  "subsubcategories": [],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6644d23e0ec8650cc41bea02"
+  },
+  "subCategoryName": "Game Design",
+  "subsubcategories": [],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6644d24b0ec8650cc41bea05"
+  },
+  "subCategoryName": "3D & Animation",
+  "subsubcategories": [],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6644d2680ec8650cc41bea1d"
+  },
+  "subCategoryName": "Fashion Design",
+  "subsubcategories": [],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6644d27c0ec8650cc41bea20"
+  },
+  "subCategoryName": "Architectural Design",
+  "subsubcategories": [],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6644d2880ec8650cc41bea23"
+  },
+  "subCategoryName": "Interior Design",
+  "subsubcategories": [],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6644d4220ec8650cc41bea9f"
+  },
+  "subCategoryName": "Mobile Development",
+  "subsubcategories": [],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6644d43e0ec8650cc41beaa2"
+  },
+  "subCategoryName": "Programming Languages",
+  "subsubcategories": [],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6644d44b0ec8650cc41beaa5"
+  },
+  "subCategoryName": "Game Development",
+  "subsubcategories": [],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6644d4640ec8650cc41beaa8"
+  },
+  "subCategoryName": "Software Testing",
+  "subsubcategories": [],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "667b081a63a0faa2f37bd030"
+  },
+  "subCategoryName": "Movie",
+  "subsubcategories": [
+    {
+      "$oid": "667b085963a0faa2f37bd036"
+    }
+  ],
+  "__v": 0
+}]

@@ -1,0 +1,153 @@
+[{
+  "_id": {
+    "$oid": "65fc15ac4bb8c5b77c701d95"
+  },
+  "categoryName": "Development",
+  "subcategories": [
+    {
+      "$oid": "65fc255c2f352d5b61cf0b98"
+    },
+    {
+      "$oid": "65fecbec13f8eb0ea8444934"
+    },
+    {
+      "$oid": "6644d4220ec8650cc41bea9f"
+    },
+    {
+      "$oid": "6644d43e0ec8650cc41beaa2"
+    },
+    {
+      "$oid": "6644d44b0ec8650cc41beaa5"
+    },
+    {
+      "$oid": "6644d4640ec8650cc41beaa8"
+    }
+  ],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "65fc3a78aae1ee160dd30fa7"
+  },
+  "categoryName": "Business",
+  "subcategories": [
+    {
+      "$oid": "65fc3aabaae1ee160dd30faa"
+    }
+  ],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "65fc6e7c1bb5cf932a814138"
+  },
+  "categoryName": "Career",
+  "subcategories": [
+    {
+      "$oid": "65fc6ef91bb5cf932a814171"
+    }
+  ],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "65fde2f348364d1a637ce29c"
+  },
+  "categoryName": "IT & Software",
+  "subcategories": [
+    {
+      "$oid": "65fde31848364d1a637ce2a6"
+    }
+  ],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "66198dd95dfe1e0e271752da"
+  },
+  "categoryName": "Entertainment",
+  "subcategories": [
+    {
+      "$oid": "66198ded5dfe1e0e271752dd"
+    }
+  ],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6644d0af0ec8650cc41be975"
+  },
+  "categoryName": "Design",
+  "subcategories": [
+    {
+      "$oid": "6644d2190ec8650cc41be9e5"
+    },
+    {
+      "$oid": "6644d2350ec8650cc41be9ff"
+    },
+    {
+      "$oid": "6644d23e0ec8650cc41bea02"
+    },
+    {
+      "$oid": "6644d24b0ec8650cc41bea05"
+    },
+    {
+      "$oid": "6644d2680ec8650cc41bea1d"
+    },
+    {
+      "$oid": "6644d27c0ec8650cc41bea20"
+    },
+    {
+      "$oid": "6644d2880ec8650cc41bea23"
+    }
+  ],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6644d0cb0ec8650cc41be977"
+  },
+  "categoryName": "Marketing",
+  "subcategories": [],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6644d0f00ec8650cc41be98d"
+  },
+  "categoryName": "Lifestyle",
+  "subcategories": [],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6644d11b0ec8650cc41be98f"
+  },
+  "categoryName": "Personal Development",
+  "subcategories": [],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6644d1260ec8650cc41be991"
+  },
+  "categoryName": "Music",
+  "subcategories": [],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6644d1740ec8650cc41be9b9"
+  },
+  "categoryName": "Health & Fitness",
+  "subcategories": [],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6644d1880ec8650cc41be9bb"
+  },
+  "categoryName": "Teaching & Academics",
+  "subcategories": [],
+  "__v": 0
+}]

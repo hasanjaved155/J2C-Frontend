@@ -1,0 +1,162 @@
+[
+  {
+    "_id": {
+      "$oid": "65fc3a52aae1ee160dd30fa4"
+    },
+    "subSubCategoryName": "Mern",
+    "__v": 0,
+    "image": "https://example.com/images/mern.png"
+  },
+  {
+    "_id": {
+      "$oid": "65fc3adaaae1ee160dd30faf"
+    },
+    "subSubCategoryName": "Business Fundamentals",
+    "__v": 0,
+    "image": "https://example.com/images/business_fundamentals.png"
+  },
+  {
+    "_id": {
+      "$oid": "65fdda91e45ffe283f3dfade"
+    },
+    "subSubCategoryName": "Angular",
+    "__v": 0,
+    "image": "https://example.com/images/angular.png"
+  },
+  {
+    "_id": {
+      "$oid": "65fddbc1e45ffe283f3dfb40"
+    },
+    "subSubCategoryName": "How PCS Global Born",
+    "__v": 0,
+    "image": "https://example.com/images/how_pcs_global_born.png"
+  },
+  {
+    "_id": {
+      "$oid": "65fddfa248364d1a637ce26d"
+    },
+    "subSubCategoryName": "Java",
+    "__v": 0,
+    "image": "https://example.com/images/java.png"
+  },
+  {
+    "_id": {
+      "$oid": "65fde34b48364d1a637ce2bc"
+    },
+    "subSubCategoryName": "Amazon AWS",
+    "__v": 0,
+    "image": "https://example.com/images/amazon_aws.png"
+  },
+  {
+    "_id": {
+      "$oid": "65fecc5413f8eb0ea8444954"
+    },
+    "subSubCategoryName": "Python",
+    "__v": 0,
+    "image": "https://example.com/images/python.png"
+  },
+  {
+    "_id": {
+      "$oid": "6602c0da4f0396ff5ef72a3e"
+    },
+    "subSubCategoryName": "CSS",
+    "__v": 0,
+    "image": "https://example.com/images/css.png"
+  },
+  {
+    "_id": {
+      "$oid": "6602c0e24f0396ff5ef72a41"
+    },
+    "subSubCategoryName": "HTML",
+    "__v": 0,
+    "image": "https://example.com/images/html.png"
+  },
+  {
+    "_id": {
+      "$oid": "6602c12f4f0396ff5ef72a4e"
+    },
+    "subSubCategoryName": "Reactjs",
+    "__v": 0,
+    "image": "https://example.com/images/reactjs.png"
+  },
+  {
+    "_id": {
+      "$oid": "6602c1384f0396ff5ef72a51"
+    },
+    "subSubCategoryName": "Node.js",
+    "__v": 0,
+    "image": "https://example.com/images/nodejs.png"
+  },
+  {
+    "_id": {
+      "$oid": "6602c13f4f0396ff5ef72a54"
+    },
+    "subSubCategoryName": "Next.js",
+    "__v": 0,
+    "image": "https://example.com/images/nextjs.png"
+  },
+  {
+    "_id": {
+      "$oid": "66198e1b5dfe1e0e271752e3"
+    },
+    "subSubCategoryName": "HindiMashup",
+    "__v": 0,
+    "image": "https://example.com/images/hindimashup.png"
+  },
+  {
+    "_id": {
+      "$oid": "6644d3390ec8650cc41bea57"
+    },
+    "subSubCategoryName": "Machine Learning",
+    "__v": 0,
+    "image": "https://example.com/images/machine_learning.png"
+  },
+  {
+    "_id": {
+      "$oid": "6644d3440ec8650cc41bea5a"
+    },
+    "subSubCategoryName": "Deep Learning",
+    "__v": 0,
+    "image": "https://example.com/images/deep_learning.png"
+  },
+  {
+    "_id": {
+      "$oid": "6644d3580ec8650cc41bea5d"
+    },
+    "subSubCategoryName": "Artificial Intelligence(AI)",
+    "__v": 0,
+    "image": "https://example.com/images/artificial_intelligence.png"
+  },
+  {
+    "_id": {
+      "$oid": "6644d3640ec8650cc41bea60"
+    },
+    "subSubCategoryName": "LangChain",
+    "__v": 0,
+    "image": "https://example.com/images/langchain.png"
+  },
+  {
+    "_id": {
+      "$oid": "6644d36d0ec8650cc41bea63"
+    },
+    "subSubCategoryName": "Data Analysis",
+    "__v": 0,
+    "image": "https://example.com/images/data_analysis.png"
+  },
+  {
+    "_id": {
+      "$oid": "6644d37d0ec8650cc41bea66"
+    },
+    "subSubCategoryName": "R (programming language)",
+    "__v": 0,
+    "image": "https://example.com/images/r_programming_language.png"
+  },
+  {
+    "_id": {
+      "$oid": "667b085963a0faa2f37bd036"
+    },
+    "subSubCategoryName": "SciFi",
+    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS-j8zFuv8Vp_wOhHnhqZY3cWpD1ppF2uKVQw&s",
+    "__v": 0
+  }
+]
