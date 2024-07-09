@@ -25,7 +25,8 @@ import CourseDescription from './adminDashboard/CourseDescription';
 import ProtectedCourse from './Components/ProtectedCourse';
 import Checkout from './Cart/Checkout';
 import CourseMiddlePage from './middlePage/CourseMiddlePage';
-axios.defaults.baseURL = "http://localhost:5000";
+// axios.defaults.baseURL = "http://localhost:5000";
+axios.defaults.baseURL = "https://j2c-backend.onrender.com";
 axios.defaults.withCredentials = true;
 
 
