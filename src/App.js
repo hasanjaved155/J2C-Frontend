@@ -25,7 +25,7 @@ import Home from './pages/Home';
 import InstructorCreateCourse from './Instructor/InstructorCreateCourse';
 
 // axios.defaults.baseURL = "http://localhost:5000";
-axios.defaults.baseURL = "https://j2-c-backend-lx0ycakkv-javed-hasans-projects.vercel.app/";
+axios.defaults.baseURL = "https://j2-c-backend.vercel.app/";
 axios.defaults.withCredentials = true;
 
 
