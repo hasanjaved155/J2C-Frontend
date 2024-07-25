@@ -2,10 +2,12 @@ import React, { Fragment, useState } from "react";
 import toast from "react-hot-toast";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import { useCourse } from "../Contexts/CourseContext";
 
-const DropDashboard = ({ displaydown, cartLength, setCartLength, setItem }) => {
+const DropDashboard = ({ cartLength, setCartLength, setItem }) => {
   const [hoveredItem, setHoveredItem] = useState(null);
   const user = JSON.parse(localStorage.getItem("user"));
+  const { dropCourse } = useCourse();
 
   const handleMouseEnter = (item) => {
     setHoveredItem(item);
@@ -53,9 +55,9 @@ const DropDashboard = ({ displaydown, cartLength, setCartLength, setItem }) => {
   return (
     <Fragment>
       <div className="flex flex-col items-center justify-center">
-        <div className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4 mt-4">
-          {displaydown.length > 0 &&
-            displaydown?.map((item) => (
+        {dropCourse?.length > 0 ? (
+          <div className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4 mt-4">
+            {dropCourse.map((item) => (
               <div
                 key={item?.id}
                 className="relative"
@@ -127,9 +129,15 @@ const DropDashboard = ({ displaydown, cartLength, setCartLength, setItem }) => {
                 )}
               </div>
             ))}
-        </div>
+          </div>
+        ) : (
+          <div className="text-center mt-8">
+            <h2 className="text-2xl font-bold">Courses are under construction</h2>
+          </div>
+        )}
       </div>
     </Fragment>
+
   );
 };
 

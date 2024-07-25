@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 
 import toast from "react-hot-toast";
+import { useCourse } from "../Contexts/CourseContext";
 const Dropdown = ({
   setDropdown,
   showDropDashboard,
@@ -15,6 +16,7 @@ const Dropdown = ({
   const [categories, setCategories] = useState([]);
   const [subcategories, setSubcategories] = useState([]);
   const [subsubcategories, setSubSubcategories] = useState([]);
+  const { setDropCourse } = useCourse();
 
   const categoryData = async () => {
     try {
@@ -41,7 +43,7 @@ const Dropdown = ({
       const res = await axios.get(
         `/category/getSubSubCategory/${subcategoryId}`
       );
-      setSubSubcategories(res.data.subsubcategory);
+      setSubSubcategories(res?.data?.subsubcategory);
     } catch (error) {
       console.error("Error fetching data:", error);
     }
@@ -50,7 +52,8 @@ const Dropdown = ({
   const fetchData = async (name) => {
     try {
       const res = await axios.get(`/course/get-dashboard?search=${name}`);
-      setDropdown(res?.data?.dashboards);
+      // setDropdown(res?.data?.dashboards);
+      setDropCourse(res?.data?.dashboards);
     } catch (err) {
       toast.error(`Failed to fetch dashboards: ${err}`);
     }

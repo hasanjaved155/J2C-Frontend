@@ -16,19 +16,4 @@ export const slidesData = [
         name: "Roger Rice",
         title: "Web Designer"
     },
-    {
-        image: "https://images.unsplash.com/photo-1502768040783-423da5fd5fa0?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=0c6416353c255d2746a68c8a83943bdf&auto=format&fit=crop&w=634&q=80",
-        name: "Jessica Garcia",
-        title: "Web Designer"
-    },
-    {
-        image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=9a138cf8acd85036bd292d7f10074e79&auto=format&fit=crop&w=634&q=80",
-        name: "Sean Adams",
-        title: "Web Designer"
-    },
-    {
-        image: "https://images.unsplash.com/photo-1500080209535-717dd4ebaa6b?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=ddee81e2e574e8190b07139ddb0f1938&auto=format&fit=crop&w=687&q=80",
-        name: "Crystal Davidson",
-        title: "Web Designer"
-    }
 ];

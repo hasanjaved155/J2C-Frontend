@@ -1,12 +1,12 @@
 import React, { useEffect } from 'react'
 import { Outlet, useNavigate } from 'react-router-dom';
 
-const ProtectedInstructor = () => {
+const ProtectedInstructorPage = () => {
     const navigate = useNavigate();
 
     const pageReload = () => {
         if (!localStorage.getItem("accessToken")) {
-            navigate("/login");
+            navigate("/teach");
         }
     };
     useEffect(() => {
@@ -20,4 +20,4 @@ const ProtectedInstructor = () => {
     );
 }
 
-export default ProtectedInstructor
+export default ProtectedInstructorPage

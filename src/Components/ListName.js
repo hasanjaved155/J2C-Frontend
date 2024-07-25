@@ -8,15 +8,15 @@ const CLIENT_ID = '441819453061-r02t424buu3pns7dp8lbqgq34p61vo8k.apps.googleuser
 const API_KEY = 'AIzaSyCK3lwlm_4XX4J4iwTkDEBgQBclwENM7Xs';
 
 
-const ListName = ({ FOLDER_ID, courseName, role, id, setRie }) => {
+const ListName = ({ FOLDER_ID, courseName, role, id, setRie, selectedVideo, setSelectedVideo }) => {
     const [videos, setVideos] = useState([]);
-    const [selectedVideo, setSelectedVideo] = useState(null);
+
     // const FOLDER_ID = '1dirIBW4ukXYuZicWMiUvsRlE3cwsVsTM';
 
     useEffect(() => {
         const loadClient = async () => {
             try {
-                console.log('Initializing Google API client...');
+                // console.log('Initializing Google API client...');
                 await window?.gapi?.client.init({
                     apiKey: API_KEY,
                     clientId: CLIENT_ID,
@@ -36,7 +36,7 @@ const ListName = ({ FOLDER_ID, courseName, role, id, setRie }) => {
                 });
 
                 const fetchedVideos = res?.result?.files;
-                console.log('Fetched videos:', fetchedVideos);
+                // console.log('Fetched videos:', fetchedVideos);
 
                 if (fetchedVideos?.length > 0) {
                     setVideos(fetchedVideos);
@@ -92,6 +92,7 @@ const ListName = ({ FOLDER_ID, courseName, role, id, setRie }) => {
 
                         {selectedVideo && (
                             <div>
+                                <h1 className='text-white'>{selectedVideo?.name}</h1>
                                 <iframe
                                     className="w-full h-[33rem] rounded-lg"
                                     src={`https://drive.google.com/file/d/${selectedVideo?.id}/preview`}

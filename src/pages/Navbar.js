@@ -4,11 +4,12 @@ import { ShoppingCartIcon, SearchIcon, MenuIcon } from '@heroicons/react/outline
 
 import { Link, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
-import images from "../images copy/pcs logo.png";
+import images from "../images copy/J2C-logo.jpg";
 
 import axios from "axios";
 import Dropdown from './../dropdown/Dropdown';
 import Dropdown1 from './../dropdown/Dropdown1';
+import { useUser } from "../Contexts/UserContext";
 
 const Navbar = ({ searchTerm, setSearchTerm, setDropdown, cartLength, setCartLength, isInstructor, setInstructor }) => {
     const navigate = useNavigate();
@@ -17,11 +18,53 @@ const Navbar = ({ searchTerm, setSearchTerm, setDropdown, cartLength, setCartLen
     const [searchInputVisible, setSearchInputVisible] = useState(false);
     const [selectedDropdown, setSelectedDropdown] = useState(null);
     const [selectedSubDropdown, setSelectedSubDropdown] = useState(null);
+    const { role } = useUser();
     // const [place, setPlace] = useState('Search For Anything')
     const [isOpen, setIsOpen] = useState(false);
     // const [userEmail, setUserEmail] = useState(null);
 
     const user = JSON.parse(localStorage.getItem('user'));
+    // const role = JSON.parse(localStorage.getItem('role'));
+
+    // const fetchUserRole = async () => {
+    //     const token = localStorage.getItem('accessToken');
+
+    //     try {
+    //         const res = await axios.get('/auth/user-role', {
+    //             headers: {
+    //                 'Authorization': `Bearer ${token}`
+    //             }
+    //         });
+    //         setRole(res?.data?.role);
+    //     } catch (error) {
+    //         console.error('Error fetching user role:', error);
+    //     }
+    // };
+
+
+    // useEffect(() => {
+    //     fetchUserRole();
+    // })
+
+
+
+    // useEffect(() => {
+    //     const fetchUserRole = async () => {
+    //         try {
+    //             const token = localStorage.getItem('accessToken'); // Adjust according to your token storage
+    //             const res = await axios.get('/auth/user-role', {
+    //                 headers: {
+    //                     'Authorization': `Bearer ${token}`
+    //                 }
+    //             });
+    //             setRole(res?.data?.role);
+    //         } catch (error) {
+    //             console.error('Error fetching user role:', error);
+    //         }
+    //     };
+
+    //     fetchUserRole();
+    // }, []);
 
     // useEffect(() => {
     //     // Simulating the setting of userEmail after login
@@ -53,6 +96,27 @@ const Navbar = ({ searchTerm, setSearchTerm, setDropdown, cartLength, setCartLen
     //     }
     // };
 
+    const checkInstructorStatus = async () => {
+        try {
+            const res = await axios.get(`/teach/checkInstructor/${user?.email}`);
+            if (res?.data && res?.data?.success) {
+                const instructor = res.data.instructor;
+                // Check if the instructor has access
+                if (instructor?.access === true) {
+                    setInstructor(true);
+                } else {
+                    setInstructor(false);
+                }
+
+            } else {
+                setInstructor(false);
+
+            }
+        } catch (error) {
+            // toast.error('Fill the form of instructor');
+        }
+    };
+
     const getInitials = (name) => {
         if (!name) return '';
 
@@ -78,7 +142,7 @@ const Navbar = ({ searchTerm, setSearchTerm, setDropdown, cartLength, setCartLen
 
         }
 
-        // checkInstructorStatus();
+        checkInstructorStatus();
 
     }, []);
 
@@ -92,11 +156,13 @@ const Navbar = ({ searchTerm, setSearchTerm, setDropdown, cartLength, setCartLen
 
 
     const navigation = [
-
-        { name: isInstructor ? "Instructor" : 'Be an Instructor', to: '/teach', current: false },
-
-
+        {
+            name: isInstructor ? "Instructor" : 'Be an Instructor',
+            to: isInstructor ? '/teachins' : '/teach',
+            current: false
+        },
     ];
+
 
     function classNames(...classes) {
         return classes.filter(Boolean).join(' ')
@@ -125,6 +191,7 @@ const Navbar = ({ searchTerm, setSearchTerm, setDropdown, cartLength, setCartLen
                 localStorage.removeItem("accessToken");
                 localStorage.removeItem("refreshToken");
                 localStorage.removeItem("user");
+                localStorage.removeItem("role");
                 setCartLength(0);
                 setInstructor(false);
                 // setInstructor(false)
@@ -153,10 +220,13 @@ const Navbar = ({ searchTerm, setSearchTerm, setDropdown, cartLength, setCartLen
             }
         } catch (error) {
             console.log(error.message);
+            setCartLength(0);
+            setInstructor(false);
             navigate("/login");
             toast.error("refresh token expired need to login again");
             localStorage.removeItem("accessToken");
             localStorage.removeItem("refreshToken");
+
         }
     };
 
@@ -289,7 +359,7 @@ const Navbar = ({ searchTerm, setSearchTerm, setDropdown, cartLength, setCartLen
                                     handlePathChange('/')
                                 }}>
                                 <img
-                                    className="h-24 w-24"
+                                    className="h-16 w-36"
                                     src={images}
                                     alt="Your Company"
                                 />
@@ -427,7 +497,7 @@ const Navbar = ({ searchTerm, setSearchTerm, setDropdown, cartLength, setCartLen
                                                         </a>
                                                     </li>
                                                     <li>
-                                                        {user?.role === 'admin' ? (
+                                                        {role === 'admin' ? (
                                                             <div
                                                                 className="text-gray-600 dark:text-gray-500 hover:text-xl cursor-pointer duration-300"
                                                                 onClick={handleAdmin}
@@ -477,7 +547,7 @@ const Navbar = ({ searchTerm, setSearchTerm, setDropdown, cartLength, setCartLen
                 isMenuOpen && (
                     <div className="md:hidden">
                         <div className="space-y-1 px-2 pb-3 pt-2">
-                            {!localStorage.getItem('token') && (
+                            {/* {!localStorage.getItem('token') && (
                                 <div className="flex justify-around">
                                     <Link
                                         to="/authSignin"
@@ -528,7 +598,7 @@ const Navbar = ({ searchTerm, setSearchTerm, setDropdown, cartLength, setCartLen
                                 >
                                     {item.name}
                                 </Link>
-                            ))}
+                            ))} */}
                         </div>
                     </div>
                 )

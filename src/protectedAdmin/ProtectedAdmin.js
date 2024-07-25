@@ -1,19 +1,23 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
+import { useUser } from "../Contexts/UserContext";
 
 const ProtectedAdmin = () => {
     const navigate = useNavigate();
+    const { role } = useUser();
 
-    if (!localStorage.getItem("accessToken")) {
-        return navigate("/login");
+    useEffect(() => {
+        if (!localStorage.getItem("accessToken")) {
+            navigate("/login");
+        } else if (role !== "admin") {
+            navigate("/");
+        }
+    }, [navigate, role]);
+
+    if (!localStorage.getItem("accessToken") || role !== "admin") {
+        return null;
     }
 
-    const user = JSON.parse(localStorage.getItem("user"));
-
-
-    if (user.role !== "admin") {
-        return navigate("/dashboard");
-    }
     return (
         <div>
             <Outlet />

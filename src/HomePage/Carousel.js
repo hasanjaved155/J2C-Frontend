@@ -3,10 +3,12 @@ import React, { useEffect, useState } from 'react';
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/solid';
 import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
+import { useCourse } from '../Contexts/CourseContext';
 
 const Carousel = ({ id, setDropdown }) => {
     const [dashboards, setDashboards] = useState([]);
     const [currentIndex, setCurrentIndex] = useState(0);
+    const { setDropCourse } = useCourse();
     const [name, setName] = useState("");
     const navigate = useNavigate();
 
@@ -26,28 +28,15 @@ const Carousel = ({ id, setDropdown }) => {
     const fetchData = async (name) => {
         try {
             const res = await axios.get(`/course/get-dashboard?search=${name}`);
-            // const filteredData = res.data.dashboards.filter((dashboard) =>
-            //   dashboard.name.toLowerCase().includes(name.toLowerCase())
-            // );
 
-            //setAllData(res.data.dashboards);
-            setDropdown(res?.data?.dashboards);
+            setDropCourse(res?.data?.dashboards)
+
         } catch (err) {
             toast.error(`Failed to fetch dashboards: ${err}`);
         }
     };
 
-    // useEffect(() => {
-    //     fetchData();
-    //     // eslint-disable-next-line
-    // }, [name])
 
-    // const searchDashboard = (name) => {
-
-    //     setName(name);
-
-
-    // };
 
     const showDropDashboard = () => {
         navigate("/drop-dashboard");

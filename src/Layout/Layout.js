@@ -2,11 +2,13 @@ import React, { Fragment } from 'react'
 import Navbar from '../pages/Navbar'
 import Footer from '../pages/Footer'
 import Navbar2 from '../pages/Navbar2'
+// import { CategoryShow } from '../HomePage/CategoryShow'
+import CategoryShow from './../HomePage/CategoryShow';
 
-const Layout = ({ children, setDropdown, searchTerm, setSearchTerm, cartLength, setCartLength, isInstructor, setInstructor }) => {
+const Layout = ({ children, role, setRole, setDropdown, searchTerm, setSearchTerm, cartLength, setCartLength, isInstructor, setInstructor }) => {
     return (
         <Fragment>
-            <div className='bg-blue-500 text-white w-full h-14 flex justify-center items-center '>
+            <div className='bg-gradient-to-r from-cyan-600 to-sky-900 text-white w-full h-14 flex justify-center items-center '>
                 <h1 className='font-bold'>
                     Future-ready skills on your schedule |
                 </h1>
@@ -23,7 +25,10 @@ const Layout = ({ children, setDropdown, searchTerm, setSearchTerm, cartLength, 
                     setCartLength={setCartLength}
                     isInstructor={isInstructor}
                     setInstructor={setInstructor}
+                    role={role}
+                    setRole={setRole}
                 />
+                <CategoryShow />
                 {/* <Navbar2 /> */}
             </header>
 

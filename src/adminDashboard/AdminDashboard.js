@@ -1,4 +1,5 @@
 import React, { useState, Suspense, lazy, useEffect } from "react";
+import InstructorAccess from "./InstructorAccess";
 
 const CreateCategory = lazy(() => import("./CreateCategory"));
 const CreateSubCategory = lazy(() => import("./CreateSubCategory"));
@@ -61,10 +62,16 @@ const AdminDashboard = () => {
             </div>
 
             <div
-              className="block cursor-pointer py-2 px-4 bg-blue-500 text-white rounded-md hover:bg-blue-600"
+              className="block cursor-pointer py-2 px-4 mb-3 bg-blue-500 text-white rounded-md hover:bg-blue-600"
               onClick={(e) => setSelect("help")}
             >
               <div>Help-Desk</div>
+            </div>
+            <div
+              className="block cursor-pointer py-2 px-4 mb-3 bg-blue-500 text-white rounded-md hover:bg-blue-600"
+              onClick={(e) => setSelect("instructor")}
+            >
+              <div>Access Instructor</div>
             </div>
           </div>
         </div>
@@ -80,6 +87,7 @@ const AdminDashboard = () => {
                 {select === "subcategories" && <CreateSubCategory />}
                 {select === "subsubcategories" && <CreateSubSubCategory />}
                 {select === "help" && <HelpDesk />}
+                {select === "instructor" && <InstructorAccess />}
               </Suspense>
             )}
           </div>
