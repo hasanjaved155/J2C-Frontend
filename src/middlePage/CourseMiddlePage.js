@@ -4,7 +4,7 @@ import toast from 'react-hot-toast';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 
-const CourseMiddlePage = ({ item, setSearchTerm, setSelectedVideo }) => {
+const CourseMiddlePage = ({ item, setSearchTerm }) => {
     const [savedItem, setSavedItem] = useState(item);
     const [description, setDescription] = useState('');
 
@@ -82,7 +82,7 @@ const CourseMiddlePage = ({ item, setSearchTerm, setSelectedVideo }) => {
                 {/* <h1 className="text-4xl flex justify-start mb-3 mt-8">xyz</h1> */}
             </div>
             <div>
-                <HeroSection savedItem={savedItem} setSelectedVideo={setSelectedVideo} />
+                <HeroSection savedItem={savedItem} />
             </div>
 
             {/* <div className='w-8/12'>

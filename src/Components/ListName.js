@@ -2,14 +2,16 @@ import React, { useState, useEffect } from 'react';
 import { gapi } from 'gapi-script';
 import Review from '../reviewRating/Review';
 import Review2 from '../reviewRating/Review2';
+import { useCourse } from '../Contexts/CourseContext';
 
 
 const CLIENT_ID = '441819453061-r02t424buu3pns7dp8lbqgq34p61vo8k.apps.googleusercontent.com';
 const API_KEY = 'AIzaSyCK3lwlm_4XX4J4iwTkDEBgQBclwENM7Xs';
 
 
-const ListName = ({ FOLDER_ID, courseName, role, id, setRie, selectedVideo, setSelectedVideo }) => {
+const ListName = ({ FOLDER_ID, courseName, role, id, setRie }) => {
     const [videos, setVideos] = useState([]);
+    const { selectedVideo, setSelectedVideo } = useCourse();
 
     // const FOLDER_ID = '1dirIBW4ukXYuZicWMiUvsRlE3cwsVsTM';
 
@@ -70,7 +72,8 @@ const ListName = ({ FOLDER_ID, courseName, role, id, setRie, selectedVideo, setS
                                     className="flex cursor-pointer justify-between rounded-xl gap-1 hover:text-white hover:shadow-sky-200 hover:shadow-lg hover:scale-105 hover:bg-gradient-to-r from-indigo-500 to-blue-700 p-2 transition-all duration-500"
                                     style={{ border: "1px solid gray" }}
                                     key={video.id}
-                                    onClick={() => handleVideoSelect(video)}>
+                                    onClick={() => handleVideoSelect(video)}
+                                >
                                     <div className="flex w-full justify-between ">
                                         <h2> {video?.name}</h2>
 

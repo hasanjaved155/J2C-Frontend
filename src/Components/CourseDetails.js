@@ -3,7 +3,7 @@ import ListName from './ListName';
 // import { useState } from 'react';
 // import { useEffect } from 'react';
 
-const CourseDetails = ({ listobject, setRie, selectedVideo, setSelectedVideo }) => {
+const CourseDetails = ({ listobject, setRie }) => {
     // const [valid, setValid] = useState(false);
     // const user = JSON.parse(localStorage.getItem("user"));
 
@@ -24,8 +24,8 @@ const CourseDetails = ({ listobject, setRie, selectedVideo, setSelectedVideo }) 
                     role={listobject?.role}
                     id={listobject?._id}
                     setRie={setRie}
-                    selectedVideo={selectedVideo}
-                    setSelectedVideo={setSelectedVideo}
+
+
                 />
             </div>
         </Fragment>

@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { gapi } from 'gapi-script';
 import { useNavigate } from 'react-router-dom';
+import { useCourse } from '../Contexts/CourseContext';
 
 const CLIENT_ID = '441819453061-r02t424buu3pns7dp8lbqgq34p61vo8k.apps.googleusercontent.com';
 const API_KEY = 'AIzaSyCK3lwlm_4XX4J4iwTkDEBgQBclwENM7Xs';
 
-const CoursePlaylist = ({ path, folderId, setSelectedVideo }) => {
+const CoursePlaylist = ({ path, folderId }) => {
+    const { setSelectedVideo } = useCourse();
     const [selectedOption, setSelectedOption] = useState('Beginner');
     const [beginnerVideos, setBeginnerVideos] = useState([]);
     const [intermediateVideos, setIntermediateVideos] = useState([]);

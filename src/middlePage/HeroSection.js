@@ -1,8 +1,31 @@
 import { motion } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import CoursePlaylist from "./CoursePlaylist";
+import axios from "axios";
+import toast from "react-hot-toast";
 
-const HeroSection = ({ savedItem, setSelectedVideo }) => {
+const HeroSection = ({ savedItem }) => {
+
+    const accessToken = localStorage.getItem('accessToken');
+
+    const handleBuyCourse = async () => {
+        try {
+            const response = await axios.post(`/course/purchase/${savedItem?._id}`, {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${accessToken}`, // Assuming the user token is stored in a state or context
+                },
+            });
+
+            if (response?.data?.success) {
+                toast.success(response?.data?.message);
+            } else {
+                toast.error(response?.data?.message);
+            }
+        } catch (error) {
+            toast.error(error.message);
+        }
+    };
 
     return (
         <section className="w-full text-start grid grid-cols-12 md:grid-cols-12 gap-8 max-w-6xl mx-auto">
@@ -26,8 +49,6 @@ const HeroSection = ({ savedItem, setSelectedVideo }) => {
                     <CoursePlaylist
                         path={savedItem?.path}
                         folderId={savedItem?.folderId}
-                        setSelectedVideo={setSelectedVideo}
-
                     />
                 </div>
             </div>
@@ -51,7 +72,8 @@ const HeroSection = ({ savedItem, setSelectedVideo }) => {
                         </div>
                     </div>
                     <div className="flex justify-end mt-4">
-                        <button type="button" className="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700">
+                        <button type="button" className="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700"
+                            onClick={handleBuyCourse}>
                             Buy This Course
                         </button>
                         <button type="button" className="flex gap-1 text-blue-500  hover:text-black outline-none font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2  after:">

@@ -5,7 +5,7 @@ import Navbar2 from '../pages/Navbar2'
 // import { CategoryShow } from '../HomePage/CategoryShow'
 import CategoryShow from './../HomePage/CategoryShow';
 
-const Layout = ({ children, role, setRole, setDropdown, searchTerm, setSearchTerm, cartLength, setCartLength, isInstructor, setInstructor }) => {
+const Layout = ({ children, searchTerm, setSearchTerm, cartLength, setCartLength, isInstructor, setInstructor }) => {
     return (
         <Fragment>
             <div className='bg-gradient-to-r from-cyan-600 to-sky-900 text-white w-full h-14 flex justify-center items-center '>
@@ -18,15 +18,14 @@ const Layout = ({ children, role, setRole, setDropdown, searchTerm, setSearchTer
             </div>
             <header>
                 <Navbar
-                    setDropdown={setDropdown}
+
                     searchTerm={searchTerm}
                     setSearchTerm={setSearchTerm}
-                    cartLength={cartLength}
-                    setCartLength={setCartLength}
+                    // cartLength={cartLength}
+                    // setCartLength={setCartLength}
                     isInstructor={isInstructor}
                     setInstructor={setInstructor}
-                    role={role}
-                    setRole={setRole}
+
                 />
                 <CategoryShow />
                 {/* <Navbar2 /> */}

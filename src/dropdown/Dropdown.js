@@ -4,7 +4,6 @@ import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { useCourse } from "../Contexts/CourseContext";
 const Dropdown = ({
-  setDropdown,
   showDropDashboard,
   showDropdown,
   selectedDropdown,

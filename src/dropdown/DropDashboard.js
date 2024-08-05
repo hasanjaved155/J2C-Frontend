@@ -3,8 +3,10 @@ import toast from "react-hot-toast";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { useCourse } from "../Contexts/CourseContext";
+import { useCart } from "../Contexts/CartContext";
 
-const DropDashboard = ({ cartLength, setCartLength, setItem }) => {
+const DropDashboard = ({ setItem }) => {
+  const { cartLength, setCartLength } = useCart();
   const [hoveredItem, setHoveredItem] = useState(null);
   const user = JSON.parse(localStorage.getItem("user"));
   const { dropCourse } = useCourse();
