@@ -2,46 +2,59 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/solid';
 import toast from 'react-hot-toast';
-import { useNavigate } from 'react-router-dom';
-import { useCourse } from '../Contexts/CourseContext';
+import { AiOutlineHeart, AiFillHeart } from "react-icons/ai"; // Import icons from react-icons
+import { Link } from 'react-router-dom';
+import { useCart } from '../Contexts/CartContext';
 
-const Carousel = ({ id, setDropdown }) => {
+const Carousel = ({ id, setItem }) => {
     const [dashboards, setDashboards] = useState([]);
     const [currentIndex, setCurrentIndex] = useState(0);
-    const { setDropCourse } = useCourse();
-    const [name, setName] = useState("");
-    const navigate = useNavigate();
+    const [favorites, setFavorites] = useState({});
+    const [courses, setCourses] = useState([]);
+    const { cartLength, setCartLength } = useCart();
+    const user = JSON.parse(localStorage.getItem("user"));
 
-    useEffect(() => {
-        const fetchSubsubcategories = async () => {
-            try {
-                const { data } = await axios.get(`/category/allsubsubcategories/${id}/subsubcategories`);
-                setDashboards(data?.subsubcategories?.slice(0, 6) || []);
-                // console.log(data?.subsubcategories);
-            } catch (error) {
-                console.error('Failed to fetch subsubcategories', error);
-            }
-        };
-        fetchSubsubcategories();
-    }, [id]);
+    const handleAddToCart = async (item) => {
 
-    const fetchData = async (name) => {
         try {
-            const res = await axios.get(`/course/get-dashboard?search=${name}`);
+            const res = await axios.post(`/cart/create-cart/${user._id}`, { name: item?.courseName, link: item?.path, image: item?.image });
+            if (res && res.data.success) {
+                toast.success(res.data.message);
+                setCartLength(cartLength + 1)
 
-            setDropCourse(res?.data?.dashboards)
+            } else if (!res.data.success) {
+                toast.error(res.data.message);
+            }
+        } catch (error) {
+            toast.error("Please login to add");
+        }
 
-        } catch (err) {
-            toast.error(`Failed to fetch dashboards: ${err}`);
+
+    };
+
+    const fetchSubsubcategoriesAndCourses = async () => {
+        try {
+            const { data } = await axios.get(`/category/allsubsubcategories/${id}/subsubcategories`);
+            const subsubcategories = data?.subsubcategories?.slice(0, 6) || [];
+            setDashboards(subsubcategories);
+
+            // Fetch courses for each subsubcategory
+            const courseRequests = subsubcategories.map(subsub =>
+                axios.get(`/course/get-dashboard?search=${subsub.subSubCategoryName}`)
+            );
+            const courseResponses = await Promise.all(courseRequests);
+            const fetchedCourses = courseResponses.flatMap(response => response.data.dashboards || []);
+            setCourses(fetchedCourses);
+        } catch (error) {
+            console.error('Failed to fetch data', error);
+            toast.error('Failed to fetch data');
         }
     };
 
+    useEffect(() => {
 
-
-    const showDropDashboard = () => {
-        navigate("/drop-dashboard");
-
-    };
+        fetchSubsubcategoriesAndCourses();
+    }, [id]);
 
     const handlePrev = () => {
         setCurrentIndex((prevIndex) => Math.max(prevIndex - 4, 0));
@@ -51,11 +64,18 @@ const Carousel = ({ id, setDropdown }) => {
         setCurrentIndex((prevIndex) => Math.min(prevIndex + 4, dashboards.length - 4));
     };
 
-    const visibleItems = dashboards.slice(currentIndex, currentIndex + 4);
+    const visibleItems = courses.slice(currentIndex, currentIndex + 4);
+
+    const toggleHeart = (itemId) => {
+        setFavorites(prevFavorites => ({
+            ...prevFavorites,
+            [itemId]: !prevFavorites[itemId]
+        }));
+    };
 
     return (
-        <div className="relative ">
-            <div className="absolute ml-14 left-0 top-1/2 transform -translate-y-1/2 z-10">
+        <div className="relative">
+            <div className="absolute left-0 top-1/2 transform -translate-y-1/2 z-10 ml-14">
                 <button
                     onClick={handlePrev}
                     className="bg-black text-white rounded-full p-2 shadow"
@@ -66,21 +86,71 @@ const Carousel = ({ id, setDropdown }) => {
             </div>
             <div className="carousel carousel-center rounded-box">
                 {visibleItems.map((item) => (
-                    <div className="carousel-item m-4 rounded-lg" key={item._id}
-                        onClick={() => {
-                            showDropDashboard();
+                    <div className="carousel-item m-4 rounded-lg bg-white text-black shadow-md p-4 max-w-xs" key={item._id}>
+                        <div className="text-center">
+                            <Link to='/description' className="left-0 right-0 top-0 bottom-0"
+                                onClick={() => setItem(item)}>
+                                <img
+                                    src={item?.image || "https://imgur.com/ZpVouSq.png"}
+                                    alt={item?.name || 'Course'}
+                                    className="rounded-lg"
+                                    style={{ width: "300px", height: "100px" }}
+                                />
 
-                            fetchData(item?.subSubCategoryName);
+                                <h5 className="text-lg pt-2 font-semibold">{item?.courseName || 'Espresso'}</h5>
 
-
-                        }}>
-                        {/* <h1>{item?.subSubCategoryName}</h1> */}
-                        <img
-                            src={item?.image || "https://img.daisyui.com/images/stock/photo-1559703248-dcaaec9fab78.jpg"}
-                            alt=""
-                            style={{ width: "300px", height: "140px" }}
-                            className='rounded-xl'
-                        />
+                                <div className="flex items-center justify-around mt-2">
+                                    <div className="flex items-center">
+                                        {[1, 2, 3, 4, 5].map((rating) => (
+                                            <div key={rating} className="flex items-center">
+                                                <input
+                                                    type="radio"
+                                                    name="rating"
+                                                    value={rating}
+                                                    id={rating.toString()}
+                                                    className="hidden"
+                                                />
+                                                <label
+                                                    htmlFor={rating.toString()}
+                                                    className={`cursor-pointer text-lg ${item?.finalRating >= rating ? 'text-yellow-400' : 'text-gray-400'
+                                                        }`}
+                                                >
+                                                    &#9733;
+                                                </label>
+                                            </div>
+                                        ))}
+                                        <p className="ml-2 text-sm font-semibold">
+                                            {item?.finalRating ?? 'No Rating'}
+                                        </p>
+                                    </div>
+                                    <div className='flex'>
+                                        <p className="ml-2 text-sm text-red-500">{item?.reviews?.length} reviews</p>
+                                    </div>
+                                </div>
+                            </Link>
+                            {/* <div className="mt-4 text-black">
+                                <h5 className="font-bold">Description</h5>
+                                <p className="text-xs mt-1">
+                                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.
+                                </p>
+                            </div> */}
+                            <div className="flex justify-between items-center mt-4">
+                                <button className="flex-1 bg-gray-800 text-white py-2 rounded-full mr-2 transition hover:bg-gray-600"
+                                    onClick={() => handleAddToCart(item)}>
+                                    Add to cart
+                                </button>
+                                <div
+                                    onClick={() => toggleHeart(item._id)}
+                                    className="flex justify-center items-center bg-yellow-400 rounded-full w-10 h-10 cursor-pointer"
+                                >
+                                    {favorites[item._id] ? (
+                                        <AiFillHeart className="text-red-600 text-2xl" />
+                                    ) : (
+                                        <AiOutlineHeart className="text-red-600 text-2xl" />
+                                    )}
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 ))}
             </div>

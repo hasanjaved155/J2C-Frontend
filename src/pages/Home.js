@@ -22,7 +22,9 @@ import 'swiper/css/navigation'
 import { slidesData } from './../HomePage/SliderVariables';
 import { styled } from 'styled-components';
 import { CategoryShow } from "../HomePage/CategoryShow";
-const Home = ({ setDropdown, setCartLength, setInstructor }) => {
+import { useCart } from "../Contexts/CartContext";
+const Home = ({ setInstructor, setItem }) => {
+    const { setCartLength } = useCart();
 
     const [categories, setCategories] = useState([]);
     const user = JSON.parse(localStorage.getItem('user'));
@@ -283,7 +285,7 @@ const Home = ({ setDropdown, setCartLength, setInstructor }) => {
                             <div>
                                 <Carousel
                                     id={item?._id}
-                                    setDropdown={setDropdown}
+                                    setItem={setItem}
                                 />
                             </div>
                         </div>

@@ -5,6 +5,7 @@ const CourseContext = createContext();
 
 // Provide the context to your app
 const CourseProvider = ({ children }) => {
+    const [selectedVideo, setSelectedVideo] = useState(null);
     const [dropCourse, setDropCourse] = useState(() => {
         // Initialize state from localStorage
         const savedCourses = localStorage.getItem("dropCourse");
@@ -19,7 +20,7 @@ const CourseProvider = ({ children }) => {
     }, [dropCourse]);
 
     return (
-        <CourseContext.Provider value={{ dropCourse, setDropCourse }}>
+        <CourseContext.Provider value={{ dropCourse, setDropCourse, setSelectedVideo, selectedVideo }}>
             {children}
         </CourseContext.Provider>
     );

@@ -10,8 +10,10 @@ import axios from "axios";
 import Dropdown from './../dropdown/Dropdown';
 import Dropdown1 from './../dropdown/Dropdown1';
 import { useUser } from "../Contexts/UserContext";
+import { useCart } from "../Contexts/CartContext";
 
-const Navbar = ({ searchTerm, setSearchTerm, setDropdown, cartLength, setCartLength, isInstructor, setInstructor }) => {
+const Navbar = ({ searchTerm, setSearchTerm, isInstructor, setInstructor }) => {
+    const { setCart, setCartLength, cartLength } = useCart();
     const navigate = useNavigate();
     const [isActive, setIsActive] = useState("");
     const [showDropdown, setShowDropdown] = useState(false);
@@ -138,6 +140,7 @@ const Navbar = ({ searchTerm, setSearchTerm, setDropdown, cartLength, setCartLen
             localStorage.removeItem("accessToken");
             localStorage.removeItem("refreshToken");
             localStorage.removeItem("user");
+            setCart([]);
             // setCartLength(0);
 
         }
@@ -193,6 +196,7 @@ const Navbar = ({ searchTerm, setSearchTerm, setDropdown, cartLength, setCartLen
                 localStorage.removeItem("user");
                 localStorage.removeItem("role");
                 setCartLength(0);
+                setCart([]);
                 setInstructor(false);
                 // setInstructor(false)
                 toast.success(data?.message);
@@ -366,7 +370,6 @@ const Navbar = ({ searchTerm, setSearchTerm, setDropdown, cartLength, setCartLen
                             </Link>
 
                             <Dropdown
-                                setDropdown={setDropdown}
                                 showDropDashboard={showDropDashboard}
                                 showDropdown={showDropdown}
                                 selectedDropdown={selectedDropdown}
@@ -425,15 +428,18 @@ const Navbar = ({ searchTerm, setSearchTerm, setDropdown, cartLength, setCartLen
                             <div className="flex items-center justify-end space-x-6 sm:ml-6 sm:space-x-4"
                                 onClick={() => setShowDropdown(false)}>
 
-                                <div className="flex items-center"><Link to='/cart'
-                                    type="button"
-                                    className="p-2 rounded-full  text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:text-green-600 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-green-700"
-                                >
+                                <div className="flex items-center">
+                                    <Link to='/cart'
+                                        type="button"
+                                        className="p-2 rounded-full  text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:text-green-600 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-green-700"
+                                    >
 
-                                    <ShoppingCartIcon className="h-6 w-6" aria-hidden="true" />
-                                </Link> <span className="bg-red-600 border-red-800 h-6 w-6 ml-[-5px] font-semibold text-white rounded-full">
+                                        <ShoppingCartIcon className="h-6 w-6" aria-hidden="true" />
+                                    </Link>
+                                    <span className="bg-red-600 border-red-800 h-6 w-6 ml-[-5px] font-semibold text-white rounded-full">
                                         {cartLength}
-                                    </span></div>
+                                    </span>
+                                </div>
 
 
 
@@ -493,24 +499,44 @@ const Navbar = ({ searchTerm, setSearchTerm, setDropdown, cartLength, setCartLen
                                                     <li>
                                                         <a href="/#" className="flex justify-between">
                                                             Role
-                                                            <span className="badge">{user?.role}</span>
+                                                            <span className="badge">{role}</span>
                                                         </a>
                                                     </li>
                                                     <li>
                                                         {role === 'admin' ? (
                                                             <div
-                                                                className="text-gray-600 dark:text-gray-500 hover:text-xl cursor-pointer duration-300"
+                                                                className="text-gray-600 dark:text-gray-500 cursor-pointer duration-300"
                                                                 onClick={handleAdmin}
                                                             >
                                                                 Admin Dashboard
                                                             </div>
                                                         ) : (
-                                                            <div
-                                                                className="text-gray-600 dark:text-gray-500 hover:text-xl cursor-pointer duration-300"
-                                                                onClick={handleUser}
-                                                            >
-                                                                User Dashboard
-                                                            </div>
+                                                            <>
+                                                                <Link to='/myCourse'
+                                                                    className="text-gray-600 dark:text-gray-500 cursor-pointer duration-300"
+                                                                    onClick={() => setIsOpen(!isOpen)}
+                                                                >
+                                                                    My Course
+                                                                </Link>
+                                                                <Link to='/cart'
+                                                                    className="text-gray-600 dark:text-gray-500 cursor-pointer duration-300"
+                                                                    onClick={() => setIsOpen(!isOpen)}
+                                                                >
+                                                                    <div className="flex gap-24">
+                                                                        <h1 className="w-4/5">My cart</h1>
+                                                                        <span>
+                                                                            {cartLength}
+                                                                        </span>
+                                                                    </div>
+                                                                </Link>
+                                                                <div
+                                                                    className="text-gray-600 dark:text-gray-500 cursor-pointer duration-300"
+                                                                    onClick={handleUser}
+                                                                >
+                                                                    User Dashboard
+                                                                </div>
+                                                            </>
+
                                                         )}
                                                     </li>
                                                     <li>

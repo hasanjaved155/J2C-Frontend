@@ -23,21 +23,20 @@ import CourseMiddlePage from './middlePage/CourseMiddlePage';
 import J2CInstructor from './Instructor/J2CInstructor';
 import Home from './pages/Home';
 import InstructorCreateCourse from './Instructor/InstructorCreateCourse';
+import MyCourse from './UserMyCourse/MyCourse';
 
-// axios.defaults.baseURL = "http://localhost:5000";
-axios.defaults.baseURL = "https://j2-c-backend-owhf9dtlj-javed-hasans-projects.vercel.app/";
+axios.defaults.baseURL = "http://localhost:5000";
+
 axios.defaults.withCredentials = true;
 
 
 const App = () => {
   const [playlist, setPlaylist] = useState([]);
-  const [displaydown, setDropdown] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
-  const [cartLength, setCartLength] = useState(0);
   const [isInstructor, setInstructor] = useState(false);
   const [item, setItem] = useState("");
   const [rie, setRie] = useState(0);
-  const [selectedVideo, setSelectedVideo] = useState(null);
+  // const [cartLength, setCartLength] = useState(0);
 
 
   const user = JSON.parse(localStorage.getItem('user'));
@@ -55,30 +54,32 @@ const App = () => {
     fetchPlaylist();
   }, []);
 
-  const fetchCartDetails = async () => {
-    try {
-      const res = await axios.get(`/cart/get-cart/${user._id}`);
-      setCartLength(res?.data?.cart?.length)
-    } catch (err) {
-      console.error(`Failed to fetch cart details: ${err}`);
-    }
-  };
+  // const fetchCartDetails = async () => {
+  //   try {
+  //     const res = await axios.get(`/cart/get-cart/${user._id}`);
+  //     setCartLength(res?.data?.cart?.length)
+  //   } catch (err) {
+  //     console.error(`Failed to fetch cart details: ${err}`);
+  //   }
+  // };
 
-  useEffect(() => {
+  // useEffect(() => {
 
-    fetchCartDetails();
+  //   fetchCartDetails();
 
-  }, []);
+  // }, []);
+
+
   return (
     <div className='App'>
       <BrowserRouter>
         <Toaster />
         <Layout
-          setDropdown={setDropdown}
+
           searchTerm={searchTerm}
           setSearchTerm={setSearchTerm}
-          cartLength={cartLength}
-          setCartLength={setCartLength}
+          // cartLength={cartLength}
+          // setCartLength={setCartLength}
           isInstructor={isInstructor}
           setInstructor={setInstructor}
 
@@ -87,9 +88,10 @@ const App = () => {
           <Routes>
             <Route path='/' element={
               <Home
-                setDropdown={setDropdown}
-                setCartLength={setCartLength}
+
+                // setCartLength={setCartLength}
                 setInstructor={setInstructor}
+                setItem={setItem}
               />
             }
             />
@@ -102,8 +104,7 @@ const App = () => {
                     element={<CourseDetails
                       listobject={a}
                       setRie={setRie}
-                      selectedVideo={selectedVideo}
-                      setSelectedVideo={setSelectedVideo}
+
                     //  setRie={setRie} 
 
                     />}
@@ -115,9 +116,9 @@ const App = () => {
             <Route
               path="/drop-dashboard"
               element={<DropDashboard
-                displaydown={displaydown}
-                cartLength={cartLength}
-                setCartLength={setCartLength}
+
+                // cartLength={cartLength}
+                // setCartLength={setCartLength}
                 setItem={setItem}
 
               />}
@@ -127,12 +128,12 @@ const App = () => {
             <Route path='/description' element={<CourseMiddlePage
               item={item}
               setSearchTerm={setSearchTerm}
-              setSelectedVideo={setSelectedVideo}
+
             />} />
             <Route element={<ProtectedAdmin />}>
               <Route path="/admin" element={<AdminDashboard />} />
             </Route>
-            <Route path="/cart" element={<CartPage setCartLength={setCartLength} />} />
+            <Route path="/cart" element={<CartPage />} />
             <Route path='/checkout' element={<Checkout />} />
             <Route path='/register' element={<Register />} />
             <Route path='/login' element={<Login setInstructor={setInstructor} />} />
@@ -151,6 +152,9 @@ const App = () => {
               <Route path="/instructor_course" element={<InstructorCreateCourse />} />
 
             </Route>
+
+            {/* user course */}
+            <Route path='/myCourse' element={<MyCourse setItem={setItem} />} />
             <Route path="/thankyou" element={<Thankyou />} />
           </Routes>
         </Layout>
