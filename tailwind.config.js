@@ -15,6 +15,9 @@ module.exports = {
       rotate: {
         'y-180': 'rotateY(180deg)'
       },
+      screens: {
+        'custom-mid': '810px'
+      },
     },
   },
   plugins: [require("daisyui")],

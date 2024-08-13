@@ -35,7 +35,7 @@ const Carousel = ({ id, setItem }) => {
     const fetchSubsubcategoriesAndCourses = async () => {
         try {
             const { data } = await axios.get(`/category/allsubsubcategories/${id}/subsubcategories`);
-            const subsubcategories = data?.subsubcategories?.slice(0, 6) || [];
+            const subsubcategories = data?.subsubcategories?.slice(0, 8) || [];
             setDashboards(subsubcategories);
 
             // Fetch courses for each subsubcategory
@@ -75,7 +75,7 @@ const Carousel = ({ id, setItem }) => {
 
     return (
         <div className="relative">
-            <div className="absolute left-0 top-1/2 transform -translate-y-1/2 z-10 ml-14">
+            <div className="absolute left-0 top-1/2 transform -translate-y-1/2 z-10 ml-7">
                 <button
                     onClick={handlePrev}
                     className="bg-black text-white rounded-full p-2 shadow"
@@ -154,7 +154,7 @@ const Carousel = ({ id, setItem }) => {
                     </div>
                 ))}
             </div>
-            <div className="absolute right-0 mr-14 top-1/2 transform -translate-y-1/2 z-10">
+            <div className="absolute right-0 mr-7 top-1/2 transform -translate-y-1/2 z-10">
                 <button
                     onClick={handleNext}
                     className="bg-black text-white rounded-full p-2 shadow"

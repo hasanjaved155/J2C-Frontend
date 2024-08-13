@@ -3,8 +3,10 @@ import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-hot-toast";
 import { useUser } from "../../Contexts/UserContext";
+import { useRemain } from "../../Contexts/RemainingContext";
 
-const Login = ({ setInstructor }) => {
+const Login = () => {
+    const { setInstructor } = useRemain();
     const [userEmail, setUserEmail] = useState(null);
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -24,8 +26,10 @@ const Login = ({ setInstructor }) => {
                 localStorage.setItem("refreshToken", res?.data?.refreshToken);
                 localStorage.setItem("user", JSON.stringify(res?.data?.loggedInUser));
                 setUserEmail(res?.data?.user?.email);
-                fetchUserRole(res?.data?.accessToken); // Pass the access token to fetch the role
+                fetchUserRole(res?.data?.accessToken);
+
                 navigate("/");
+                window.location.reload(); // Refresh the page after navigating
             } else if (!res.data.success) {
                 toast.error(res.data.message);
             }
@@ -44,30 +48,6 @@ const Login = ({ setInstructor }) => {
             setRole(res?.data?.role);
         } catch (error) {
             console.error('Error fetching user role:', error);
-        }
-    };
-
-    useEffect(() => {
-        if (userEmail) {
-            checkInstructorStatus(userEmail);
-        }
-    }, [userEmail]);
-
-    const checkInstructorStatus = async (userEmail) => {
-        if (!userEmail) {
-            console.warn('User email is undefined');
-            return;
-        }
-
-        try {
-            const res = await axios.get(`/teach/checkInstructor/${userEmail}`);
-            if (res?.data && res?.data?.success) {
-                setInstructor(true);
-            } else {
-                setInstructor(false);
-            }
-        } catch (error) {
-            toast.error('Fill the form of instructor');
         }
     };
 

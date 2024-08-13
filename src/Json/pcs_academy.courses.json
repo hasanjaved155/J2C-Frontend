@@ -1,0 +1,359 @@
+[
+  {
+    "_id": {
+      "$oid": "6676e9653bf71a060e37ed84"
+    },
+    "path": "/mernstack",
+    "courseName": "Mern Stack Crash Course",
+    "folderId": "108T-I5pjgqf2FjWjhj9QWmourZA5oN61",
+    "image": "https://res.cloudinary.com/dalfbjhy3/image/upload/v1714247735/fn8hnwijjvh1vm4hrbzx.jpg",
+    "courseTitle": "MERN STACK",
+    "finalRating": 3.6,
+    "reviews": [
+      {
+        "$oid": "668585f98d4f43d59a179b20"
+      },
+      {
+        "$oid": "6686cda80fde9842e2382161"
+      },
+      {
+        "$oid": "6686cdb60fde9842e238216a"
+      },
+      {
+        "$oid": "6686cf170fde9842e238219a"
+      },
+      {
+        "$oid": "6686cf280fde9842e23821a3"
+      },
+      {
+        "$oid": "6686cf360fde9842e23821ac"
+      },
+      {
+        "$oid": "6686e4470fde9842e2382328"
+      },
+      {
+        "$oid": "6686e44f0fde9842e2382331"
+      },
+      {
+        "$oid": "6686e4a90fde9842e238233e"
+      },
+      {
+        "$oid": "6686e84a0fde9842e238235a"
+      },
+      {
+        "$oid": "66882321ff81e3ed1aba6b75"
+      }
+    ],
+    "role": [
+      {
+        "rolename": "Employee",
+        "_id": {
+          "$oid": "6676e9653bf71a060e37ed85"
+        }
+      }
+    ],
+    "createdAt": {
+      "$date": "2024-06-22T15:10:29.100Z"
+    },
+    "updatedAt": {
+      "$date": "2024-07-05T16:45:22.392Z"
+    },
+    "__v": 11,
+    "authorName": "Javed Hasan",
+    "courseInfo": "An introductory course to the MERN stack covering MongoDB, Express.js, React.js, and Node.js."
+  },
+  {
+    "_id": {
+      "$oid": "667a9595bb19c81ea4bdb195"
+    },
+    "path": "/core-java",
+    "courseName": "Core Java",
+    "folderId": "1erKLcgAkxF5k01VYBpARuAjEwJ7UO-rT",
+    "image": "https://res.cloudinary.com/dalfbjhy3/image/upload/v1719309714/nmjktx0t04hakuymh2km.webp",
+    "courseTitle": "JAVA",
+    "finalRating": 0,
+    "reviews": [],
+    "role": [
+      {
+        "rolename": "Buyer",
+        "_id": {
+          "$oid": "667a9595bb19c81ea4bdb196"
+        }
+      }
+    ],
+    "createdAt": {
+      "$date": "2024-06-25T10:01:57.937Z"
+    },
+    "updatedAt": {
+      "$date": "2024-06-25T10:01:57.937Z"
+    },
+    "__v": 0,
+    "authorName": "XYZ",
+    "courseInfo": "A foundational course on Java programming covering basic to intermediate concepts."
+  },
+  {
+    "_id": {
+      "$oid": "667adc60bb19c81ea4bdb210"
+    },
+    "path": "/angular",
+    "courseName": "Angular",
+    "folderId": "18NJ8w_6ynGKRQgbvi2HvFiZzBBM-UpDL",
+    "image": "https://res.cloudinary.com/dalfbjhy3/image/upload/v1719327838/ov3ekowjxz1kpbj3sp2q.webp",
+    "courseTitle": "ANGULAR",
+    "finalRating": 0,
+    "reviews": [],
+    "role": [
+      {
+        "rolename": "Buyer",
+        "_id": {
+          "$oid": "667adc60bb19c81ea4bdb211"
+        }
+      }
+    ],
+    "createdAt": {
+      "$date": "2024-06-25T15:04:00.665Z"
+    },
+    "updatedAt": {
+      "$date": "2024-06-25T15:04:00.665Z"
+    },
+    "__v": 0,
+    "authorName": "XYZ",
+    "courseInfo": "An in-depth guide to Angular framework, including components, services, and data binding."
+  },
+  {
+    "_id": {
+      "$oid": "667addd4bb19c81ea4bdb225"
+    },
+    "path": "/angular2",
+    "courseName": "Angular2",
+    "folderId": "1Hf_Om6d6bpF3lhjB164B1yv_YJIsleLO",
+    "image": "https://res.cloudinary.com/dalfbjhy3/image/upload/v1719328209/yhzjigldty9diusqfxop.jpg",
+    "courseTitle": "ANGULAR",
+    "finalRating": 0,
+    "reviews": [],
+    "role": [
+      {
+        "rolename": "Buyer",
+        "_id": {
+          "$oid": "667addd4bb19c81ea4bdb226"
+        }
+      }
+    ],
+    "createdAt": {
+      "$date": "2024-06-25T15:10:12.766Z"
+    },
+    "updatedAt": {
+      "$date": "2024-06-25T15:10:12.766Z"
+    },
+    "__v": 0,
+    "authorName": "XYZ",
+    "courseInfo": "A follow-up course to Angular, focusing on more advanced features and best practices."
+  },
+  {
+    "_id": {
+      "$oid": "667ade66bb19c81ea4bdb229"
+    },
+    "path": "/career",
+    "courseName": "Career Journey Stories",
+    "folderId": "1nP5LX6Y818FNX4dQtW2dRCqkm2odbuFD",
+    "image": "https://res.cloudinary.com/dalfbjhy3/image/upload/v1719328354/sznbxyxyavntn8qwbl83.jpg",
+    "courseTitle": "CAREER",
+    "finalRating": 0,
+    "reviews": [],
+    "role": [
+      {
+        "rolename": "Buyer",
+        "_id": {
+          "$oid": "667ade66bb19c81ea4bdb22a"
+        }
+      }
+    ],
+    "createdAt": {
+      "$date": "2024-06-25T15:12:38.281Z"
+    },
+    "updatedAt": {
+      "$date": "2024-06-25T15:12:38.281Z"
+    },
+    "__v": 0,
+    "authorName": "XYZ",
+    "courseInfo": "Inspirational stories from professionals about their career journeys and lessons learned."
+  },
+  {
+    "_id": {
+      "$oid": "667adee2bb19c81ea4bdb22d"
+    },
+    "path": "/motivation",
+    "courseName": "Career Motivation",
+    "folderId": "1fk_ZSZEsJ9YALI-_2moMh8nWI4isaS0B",
+    "image": "https://res.cloudinary.com/dalfbjhy3/image/upload/v1719328479/lldp2bigjxv3zyva3b9w.jpg",
+    "courseTitle": "MOTIVATION",
+    "finalRating": 0,
+    "reviews": [],
+    "role": [
+      {
+        "rolename": "Buyer",
+        "_id": {
+          "$oid": "667adee2bb19c81ea4bdb22e"
+        }
+      }
+    ],
+    "createdAt": {
+      "$date": "2024-06-25T15:14:42.785Z"
+    },
+    "updatedAt": {
+      "$date": "2024-06-25T15:14:42.785Z"
+    },
+    "__v": 0,
+    "authorName": "XYZ",
+    "courseInfo": "A course designed to help you stay motivated and focused in your career path."
+  },
+  {
+    "_id": {
+      "$oid": "667adf4dbb19c81ea4bdb231"
+    },
+    "path": "/devops",
+    "courseName": "DevOps",
+    "folderId": "1dG1WcvUskxkBtf4XREgSoaIR3IvQfv6r",
+    "image": "https://res.cloudinary.com/dalfbjhy3/image/upload/v1719328582/liyhoeln0jqjwsozyixh.jpg",
+    "courseTitle": "DEVOPS",
+    "finalRating": 0,
+    "reviews": [],
+    "role": [
+      {
+        "rolename": "Buyer",
+        "_id": {
+          "$oid": "667adf4dbb19c81ea4bdb232"
+        }
+      }
+    ],
+    "createdAt": {
+      "$date": "2024-06-25T15:16:29.332Z"
+    },
+    "updatedAt": {
+      "$date": "2024-06-25T15:16:29.332Z"
+    },
+    "__v": 0,
+    "authorName": "XYZ",
+    "courseInfo": "Learn about DevOps practices, tools, and culture to bridge the gap between development and operations."
+  },
+  {
+    "_id": {
+      "$oid": "667ae9d2bb19c81ea4bdb237"
+    },
+    "path": "/django",
+    "courseName": "Django",
+    "folderId": "1e4d8kjhcGeK-CB5ZyLh52s8bKwt5w-4i",
+    "image": "https://res.cloudinary.com/dalfbjhy3/image/upload/v1719331278/y69ejdx4hxdbtrdrntk0.webp",
+    "courseTitle": "DJANGO",
+    "finalRating": 0,
+    "reviews": [],
+    "role": [
+      {
+        "rolename": "Buyer",
+        "_id": {
+          "$oid": "667ae9d2bb19c81ea4bdb238"
+        }
+      }
+    ],
+    "createdAt": {
+      "$date": "2024-06-25T16:01:22.222Z"
+    },
+    "updatedAt": {
+      "$date": "2024-06-25T16:01:22.222Z"
+    },
+    "__v": 0,
+    "authorName": "XYZ",
+    "courseInfo": "A comprehensive course on Django, covering everything from setup to building full-featured web applications."
+  },
+  {
+    "_id": {
+      "$oid": "667aea92bb19c81ea4bdb23b"
+    },
+    "path": "/mernstackq3",
+    "courseName": "Eilp Q3 Mern Stack",
+    "folderId": "1AmeqTxgejRUxUR3pYa2raNYtGejNod86",
+    "image": "https://res.cloudinary.com/dalfbjhy3/image/upload/v1719331472/bnhpdobap8fckjrwdocm.jpg",
+    "courseTitle": "MERN STACK",
+    "finalRating": 4,
+    "reviews": [
+      {
+        "$oid": "66b1058f012ce13c0952b9be"
+      }
+    ],
+    "role": [
+      {
+        "rolename": "Buyer",
+        "_id": {
+          "$oid": "667aea92bb19c81ea4bdb23c"
+        }
+      }
+    ],
+    "createdAt": {
+      "$date": "2024-06-25T16:04:34.509Z"
+    },
+    "updatedAt": {
+      "$date": "2024-08-05T17:02:08.394Z"
+    },
+    "__v": 1,
+    "authorName": "XYZ",
+    "courseInfo": "A detailed course on MERN stack, focusing on building full-stack applications using MongoDB, Express.js, React.js, and Node.js."
+  },
+  {
+    "_id": {
+      "$oid": "667aeb7bbb19c81ea4bdb247"
+    },
+    "path": "/java",
+    "courseName": "Full Stack Java",
+    "folderId": "1MwPHP7UWPjzJMxAdloz-UvsTYc3i0w4G",
+    "image": "https://res.cloudinary.com/dalfbjhy3/image/upload/v1719331660/nwp85gqjybzacj3kikab.jpg",
+    "courseTitle": "JAVA",
+    "finalRating": 0,
+    "reviews": [],
+    "role": [
+      {
+        "rolename": "Buyer",
+        "_id": {
+          "$oid": "667aeb7bbb19c81ea4bdb248"
+        }
+      }
+    ],
+    "createdAt": {
+      "$date": "2024-06-25T16:08:27.516Z"
+    },
+    "updatedAt": {
+      "$date": "2024-06-25T16:08:27.516Z"
+    },
+    "__v": 0,
+    "authorName": "XYZ",
+    "courseInfo": "A complete course on full stack Java development, covering backend and frontend technologies."
+  },
+  {
+    "_id": {
+      "$oid": "667aebe3bb19c81ea4bdb24b"
+    },
+    "path": "/pcs-born",
+    "courseName": "How PCS Global Born",
+    "folderId": "13Pe8qBWm4pPZsVLUnlIj9sPO713mvF7a",
+    "image": "https://res.cloudinary.com/dalfbjhy3/image/upload/v1715100538/l17aaa8ejiz4y3mbmj61.webp",
+    "courseTitle": "PCS",
+    "finalRating": 0,
+    "reviews": [],
+    "role": [
+      {
+        "rolename": "Buyer",
+        "_id": {
+          "$oid": "667aebe3bb19c81ea4bdb24c"
+        }
+      }
+    ],
+    "createdAt": {
+      "$date": "2024-06-25T16:10:11.101Z"
+    },
+    "updatedAt": {
+      "$date": "2024-06-25T16:10:11.101Z"
+    },
+    "__v": 0,
+    "authorName": "XYZ",
+    "courseInfo": "An insightful course on the history and formation of PCS Global, exploring its origins and growth."
+  }
+]

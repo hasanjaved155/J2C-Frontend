@@ -5,6 +5,7 @@ import App from './App';
 import { CourseProvider } from './Contexts/CourseContext';
 import { UserProvider } from './Contexts/UserContext';
 import { CartProvider } from './Contexts/CartContext';
+import { RemainingProvider } from './Contexts/RemainingContext';
 // import 'swiper/swiper-bundle.css';
 
 
@@ -14,7 +15,9 @@ root.render(
   <UserProvider>
     <CourseProvider>
       <CartProvider>
-        <App />
+        <RemainingProvider>
+          <App />
+        </RemainingProvider>
       </CartProvider>
     </CourseProvider>
   </UserProvider>

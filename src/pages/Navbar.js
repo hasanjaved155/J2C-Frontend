@@ -1,18 +1,25 @@
 import React, { useEffect, useState } from "react";
-
-import { ShoppingCartIcon, SearchIcon, MenuIcon } from '@heroicons/react/outline';
+import { motion, AnimatePresence } from "framer-motion";
+import {
+    ShoppingCartIcon,
+    SearchIcon,
+    MenuIcon,
+} from "@heroicons/react/outline";
 
 import { Link, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import images from "../images copy/J2C-logo.jpg";
 
 import axios from "axios";
-import Dropdown from './../dropdown/Dropdown';
-import Dropdown1 from './../dropdown/Dropdown1';
+import Dropdown from "./../dropdown/Dropdown";
+import Dropdown1 from "./../dropdown/Dropdown1";
 import { useUser } from "../Contexts/UserContext";
 import { useCart } from "../Contexts/CartContext";
+import CategoryShow from "../HomePage/CategoryShow";
+import { useRemain } from "../Contexts/RemainingContext";
 
-const Navbar = ({ searchTerm, setSearchTerm, isInstructor, setInstructor }) => {
+const Navbar = ({ searchTerm, setSearchTerm }) => {
+    const { isInstructor, setInstructor } = useRemain();
     const { setCart, setCartLength, cartLength } = useCart();
     const navigate = useNavigate();
     const [isActive, setIsActive] = useState("");
@@ -25,7 +32,10 @@ const Navbar = ({ searchTerm, setSearchTerm, isInstructor, setInstructor }) => {
     const [isOpen, setIsOpen] = useState(false);
     // const [userEmail, setUserEmail] = useState(null);
 
-    const user = JSON.parse(localStorage.getItem('user'));
+    const user = JSON.parse(localStorage.getItem("user"));
+
+    const [showSubcategories, setShowSubcategories] = useState(false);
+
     // const role = JSON.parse(localStorage.getItem('role'));
 
     // const fetchUserRole = async () => {
@@ -43,60 +53,13 @@ const Navbar = ({ searchTerm, setSearchTerm, isInstructor, setInstructor }) => {
     //     }
     // };
 
-
     // useEffect(() => {
     //     fetchUserRole();
     // })
 
 
 
-    // useEffect(() => {
-    //     const fetchUserRole = async () => {
-    //         try {
-    //             const token = localStorage.getItem('accessToken'); // Adjust according to your token storage
-    //             const res = await axios.get('/auth/user-role', {
-    //                 headers: {
-    //                     'Authorization': `Bearer ${token}`
-    //                 }
-    //             });
-    //             setRole(res?.data?.role);
-    //         } catch (error) {
-    //             console.error('Error fetching user role:', error);
-    //         }
-    //     };
 
-    //     fetchUserRole();
-    // }, []);
-
-    // useEffect(() => {
-    //     // Simulating the setting of userEmail after login
-    //     // Replace with actual logic to get user email
-    //     setUserEmail(user?.email);
-    // }, []);
-
-    // useEffect(() => {
-    //     if (userEmail) {
-    //         checkInstructorStatus(userEmail);
-    //     }
-    // }, [userEmail]);
-
-    // const checkInstructorStatus = async (userEmail) => {
-    //     if (!userEmail) {
-    //         console.warn('User email is undefined');
-    //         return;
-    //     }
-
-    //     try {
-    //         const res = await axios.get(`/teach/checkInstructor/${userEmail}`);
-    //         if (res?.data && res?.data?.success) {
-    //             setInstructor(true);
-    //         } else {
-    //             setInstructor(false);
-    //         }
-    //     } catch (error) {
-    //         toast.error('Fill the form of instructor');
-    //     }
-    // };
 
     const checkInstructorStatus = async () => {
         try {
@@ -109,10 +72,8 @@ const Navbar = ({ searchTerm, setSearchTerm, isInstructor, setInstructor }) => {
                 } else {
                     setInstructor(false);
                 }
-
             } else {
                 setInstructor(false);
-
             }
         } catch (error) {
             // toast.error('Fill the form of instructor');
@@ -120,21 +81,24 @@ const Navbar = ({ searchTerm, setSearchTerm, isInstructor, setInstructor }) => {
     };
 
     const getInitials = (name) => {
-        if (!name) return '';
+        if (!name) return "";
 
-        const nameArray = name.split(' ');
+        const nameArray = name.split(" ");
         if (nameArray.length === 1) {
             return nameArray[0].slice(0, 1).toUpperCase();
         }
 
-        return nameArray[0].slice(0, 1).toUpperCase() + nameArray[1].slice(0, 1).toUpperCase();
+        return (
+            nameArray[0].slice(0, 1).toUpperCase() +
+            nameArray[1].slice(0, 1).toUpperCase()
+        );
     };
 
     useEffect(() => {
         // Check if both token and user exist in local storage
-        const accessToken = localStorage.getItem('accessToken');
-        const refreshToken = localStorage.getItem('refreshToken');
-        const user = localStorage.getItem('user');
+        const accessToken = localStorage.getItem("accessToken");
+        const refreshToken = localStorage.getItem("refreshToken");
+        const user = localStorage.getItem("user");
 
         if (!(accessToken && refreshToken && user)) {
             localStorage.removeItem("accessToken");
@@ -142,33 +106,25 @@ const Navbar = ({ searchTerm, setSearchTerm, isInstructor, setInstructor }) => {
             localStorage.removeItem("user");
             setCart([]);
             // setCartLength(0);
-
         }
 
-        checkInstructorStatus();
-
+        // checkInstructorStatus();
     }, []);
-
-
-
 
     const toggleAvatar = () => {
         setIsOpen(!isOpen); // Toggle the state between true and false
     };
 
-
-
     const navigation = [
         {
-            name: isInstructor ? "Instructor" : 'Be an Instructor',
-            to: isInstructor ? '/teachins' : '/teach',
-            current: false
+            name: isInstructor ? "Instructor" : "Be an Instructor",
+            to: isInstructor ? "/teachins" : "/teach",
+            current: false,
         },
     ];
 
-
     function classNames(...classes) {
-        return classes.filter(Boolean).join(' ')
+        return classes.filter(Boolean).join(" ");
     }
     const handleCategoryClick = (category) => {
         setIsActive(category);
@@ -176,18 +132,17 @@ const Navbar = ({ searchTerm, setSearchTerm, isInstructor, setInstructor }) => {
     };
 
     const handlelogout = async () => {
-
         try {
-            const token = localStorage.getItem('accessToken');
+            const token = localStorage.getItem("accessToken");
             const { data } = await axios.post(
-                '/auth/logout',
+                "/auth/logout",
                 {}, // Pass an empty object as the data since we're using headers
                 {
                     headers: {
-                        'Authorization': `Bearer ${token}`, // Include token in the Authorization header
-                        'Content-Type': 'application/json'
+                        Authorization: `Bearer ${token}`, // Include token in the Authorization header
+                        "Content-Type": "application/json",
                     },
-                    withCredentials: true // Include cookies in the request
+                    withCredentials: true, // Include cookies in the request
                 }
             );
             if (data?.success) {
@@ -202,20 +157,21 @@ const Navbar = ({ searchTerm, setSearchTerm, isInstructor, setInstructor }) => {
                 toast.success(data?.message);
                 navigate("/login");
             }
-
         } catch (error) {
-            toast.error("Token have expired please refresh the token")
+            toast.error("Token have expired please refresh the token");
             console.log(error.message);
         }
-
-
     };
 
     const handleRefreshToken = async () => {
         try {
-            const res = await axios.post('/auth/refresh-token', {}, {
-                withCredentials: true // Ensure cookies are sent with the request
-            });
+            const res = await axios.post(
+                "/auth/refresh-token",
+                {},
+                {
+                    withCredentials: true, // Ensure cookies are sent with the request
+                }
+            );
             console.log(res.data);
             if (res && res?.data?.success) {
                 toast.success(res?.data?.message);
@@ -230,7 +186,6 @@ const Navbar = ({ searchTerm, setSearchTerm, isInstructor, setInstructor }) => {
             toast.error("refresh token expired need to login again");
             localStorage.removeItem("accessToken");
             localStorage.removeItem("refreshToken");
-
         }
     };
 
@@ -268,22 +223,21 @@ const Navbar = ({ searchTerm, setSearchTerm, isInstructor, setInstructor }) => {
 
     const handlePathChange = (path) => {
         // setPlace("Search For Anything");
-        setSearchTerm(''); // Clear search term
+        setSearchTerm(""); // Clear search term
         navigate(`${path}`);
     };
 
     const handleSearch = (event) => {
         event.preventDefault();
-        const inputValue = event.target.value || '';
+        const inputValue = event.target.value || "";
 
         // setPlace(inputValue.trim());
         // setSearchTerm(inputValue);
-        navigate('/dashboard');
+        navigate("/dashboard");
 
         // if (inputValue.trim() === '') {
         //     setPlace("Search For Anything");
         // }
-
     };
 
     const handleAdmin = () => {
@@ -342,31 +296,26 @@ const Navbar = ({ searchTerm, setSearchTerm, isInstructor, setInstructor }) => {
     };
 
     return (
-        <nav className="bg-white border-blue-500 border-y-2 shadow-lg">
+        <nav className="bg-white ">
             <div className="mx-auto sm:px-6 ">
                 <div className="relative flex h-16 items-center justify-between">
-                    <div className="flex items-center sm:hidden">
-                        <button
-                            className="p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none"
-                            onClick={toggleMenu}
-                        >
-                            <MenuIcon className="block h-6 w-6" aria-hidden="true" />
-                        </button>
-                    </div>
                     <div className="flex items-center w-full justify-between">
-
-
-                        <div className="flex space-x-4 items-center">
-                            <Link to='/' className="flex-shrink-0 items-center"
+                        <div className="flex gap-6 items-center justify-between">
+                            <button
+                                className="block custom-mid:hidden p-2 text-gray-400  hover:text-gray-600 focus:outline-none"
+                                onClick={toggleMenu}
+                            >
+                                <MenuIcon className="block h-6 w-6" aria-hidden="true" />
+                            </button>
+                            <Link
+                                to="/"
+                                className="flex-shrink-0 items-center  hidden custom-mid:block"
                                 onClick={() => {
                                     setShowDropdown(false);
-                                    handlePathChange('/')
-                                }}>
-                                <img
-                                    className="h-16 w-36"
-                                    src={images}
-                                    alt="Your Company"
-                                />
+                                    handlePathChange("/");
+                                }}
+                            >
+                                <img className="h-12" src={images} alt="Your Company" />
                             </Link>
 
                             <Dropdown
@@ -378,76 +327,88 @@ const Navbar = ({ searchTerm, setSearchTerm, isInstructor, setInstructor }) => {
                                 toggleSubDropdown={toggleSubDropdown}
                                 toggleSubSubDropdown={toggleSubSubDropdown}
                             />
-                            <form onSubmit={handleSearch} className="relative h-12 w-[38rem] items-center flex rounded-full  p-1 text-gray-800 border-2 border-blue-500">
+                            <form
+                                onSubmit={handleSearch}
+                                className="relative bg-gray-50 flex-grow h-12 hidden lg:w-[24rem] items-center custom-mid:flex rounded-full p-1 text-gray-800 border border-gray-600 "
+                            >
                                 <SearchIcon className="h-5 mx-2" />
                                 <input
                                     type="text"
                                     placeholder="Search For Anything"
-                                    className="bg-transparent text-gray-800 text-sm outline-none"
+                                    className="bg-transparent text-gray-800 text-sm outline-none flex-grow"
                                     value={searchTerm}
                                     onChange={(e) => setSearchTerm(e.target.value)}
                                     onClick={() => setShowDropdown(false)}
                                     onSubmit={handleSearch}
                                 />
                             </form>
-
                         </div>
+                        <Link
+                            to="/"
+                            className="flex-shrink-0 items-center block custom-mid:hidden"
+                            onClick={() => {
+                                setShowDropdown(false);
+                                handlePathChange("/");
+                            }}
+                        >
+                            <img className="h-10" src={images} alt="Your Company" />
+                        </Link>
                         <div className="flex items-center">
                             {navigation.map((item) => (
                                 <Link
                                     key={item?.name}
                                     to={item?.to}
-                                    className={`px-3 py-2 text-sm md:hidden lg:block font-medium ${item.current ? 'text-gray-900' : 'text-gray-800 hover:text-white hover:bg-gray-700 rounded-md'
-                                        }`}
+                                    className={` px-3 py-2 text-sm hidden lg:block font-medium ${item.current
+                                        ? "text-gray-900"
+                                        : "text-gray-800 hover:text-cyan-700 rounded-md"
+                                        } whitespace-nowrap`}
                                     onClick={() => {
                                         handleCategoryClick(item?.name);
                                         setShowDropdown(false);
-                                        handlePathChange(item?.to)
-                                    }
-                                    }
+                                        handlePathChange(item?.to);
+                                    }}
                                 >
                                     {item?.name}
                                 </Link>
                             ))}
                             <Link
-
-                                to='/help'
-                                className={`px-3 py-2 text-sm md:hidden lg:block font-medium ${false ? 'text-gray-900' : 'text-gray-800 hover:text-white hover:bg-gray-700 rounded-md'
+                                to="/help"
+                                className={`px-3 py-2 text-sm hidden lg:block font-medium ${false
+                                    ? "text-gray-900"
+                                    : "text-gray-800 hover:text-cyan-700 rounded-md"
                                     }`}
                                 onClick={() => {
-                                    handleCategoryClick('Help');
+                                    handleCategoryClick("Help");
                                     setShowDropdown(false);
-                                    handlePathChange('/help')
-                                }
-                                }
+                                    handlePathChange("/help");
+                                }}
                             >
                                 Help
                             </Link>
 
-
-                            <div className="flex items-center justify-end space-x-6 sm:ml-6 sm:space-x-4"
-                                onClick={() => setShowDropdown(false)}>
-
+                            <div
+                                className="flex items-center justify-end space-x-1 sm:ml-6 sm:space-x-4"
+                                onClick={() => setShowDropdown(false)}
+                            >
                                 <div className="flex items-center">
-                                    <Link to='/cart'
+                                    <Link
+                                        to="/cart"
                                         type="button"
                                         className="p-2 rounded-full  text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:text-green-600 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-green-700"
                                     >
-
                                         <ShoppingCartIcon className="h-6 w-6" aria-hidden="true" />
                                     </Link>
-                                    <span className="bg-red-600 border-red-800 h-6 w-6 ml-[-5px] font-semibold text-white rounded-full">
+                                    <span className="bg-red-600 border-red-800 h-5 w-5 ml-[-10px] font-semibold text-white rounded-full flex items-center justify-center">
                                         {cartLength}
                                     </span>
                                 </div>
-
-
 
                                 {!localStorage.getItem("accessToken") ? (
                                     <div className="flex space-x-4">
                                         <Link
                                             to="/login"
-                                            className={`px-3 py-2 text-sm hidden  md:block lg:block font-bold border border-black rounded hover:bg-gray-200 text-gray-900 ${isActive === 'signin' ? 'bg-slate-100' : ''}`}
+                                            className={`px-3 py-2 text-sm hidden  custom-mid:block  font-bold border border-black rounded hover:bg-gray-200 text-gray-900 ${isActive === "signin" ? "bg-slate-100" : ""
+                                                } whitespace-nowrap`}
                                             onClick={() => {
                                                 handleCategoryClick("signin");
                                                 setShowDropdown(false);
@@ -457,15 +418,14 @@ const Navbar = ({ searchTerm, setSearchTerm, isInstructor, setInstructor }) => {
                                         </Link>
                                         <Link
                                             to="/register"
-                                            className={`px-3 py-2 text-sm hidden md:block lg:block font-bold bg-black text-white rounded hover:bg-gray-800`}
+                                            className={`px-3 py-2 text-sm hidden custom-mid:block  font-bold bg-black text-white rounded hover:bg-gray-800 whitespace-nowrap`}
                                             onClick={() => setShowDropdown(false)}
                                         >
                                             Sign Up
                                         </Link>
                                     </div>
                                 ) : (
-                                    <div className="flex items-center space-x-6 rtl:space-x-reverse"
-                                    >
+                                    <div className=" items-center space-x-6 rtl:space-x-reverse flex">
                                         <div className="dropdown dropdown-end">
                                             <div
                                                 tabIndex={0}
@@ -474,10 +434,12 @@ const Navbar = ({ searchTerm, setSearchTerm, isInstructor, setInstructor }) => {
                                                 onClick={toggleAvatar}
                                             >
                                                 <div className="avatar placeholder">
-                                                    <div className="bg-neutral text-neutral-content rounded-full w-10">
-                                                        <span className="text-xl">
+                                                    <div className="bg-neutral text-neutral-content rounded-full w-8 sm:w-10">
+                                                        <span className="text-lg sm:xl">
                                                             {(user?.name && getInitials(user?.name)) ||
-                                                                (user?.firstName && user.firstName.slice(0, 1) + user.lastName.slice(0, 1))}
+                                                                (user?.firstName &&
+                                                                    user.firstName.slice(0, 1) +
+                                                                    user.lastName.slice(0, 1))}
                                                         </span>
                                                     </div>
                                                 </div>
@@ -486,13 +448,14 @@ const Navbar = ({ searchTerm, setSearchTerm, isInstructor, setInstructor }) => {
                                             {isOpen && ( // Render the dropdown only if isOpen is true
                                                 <ul
                                                     tabIndex={0}
-                                                    className="mt-3 z-20 p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52"
+                                                    className="mt-3 mr-2 z-30 p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52"
                                                 >
                                                     <li>
                                                         <a href="/#" className="flex justify-between">
                                                             Name
                                                             <span className="badge">
-                                                                {user?.name || `${user?.firstName} ${user?.lastName}`}
+                                                                {user?.name ||
+                                                                    `${user?.firstName} ${user?.lastName}`}
                                                             </span>
                                                         </a>
                                                     </li>
@@ -503,7 +466,7 @@ const Navbar = ({ searchTerm, setSearchTerm, isInstructor, setInstructor }) => {
                                                         </a>
                                                     </li>
                                                     <li>
-                                                        {role === 'admin' ? (
+                                                        {role === "admin" ? (
                                                             <div
                                                                 className="text-gray-600 dark:text-gray-500 cursor-pointer duration-300"
                                                                 onClick={handleAdmin}
@@ -512,21 +475,21 @@ const Navbar = ({ searchTerm, setSearchTerm, isInstructor, setInstructor }) => {
                                                             </div>
                                                         ) : (
                                                             <>
-                                                                <Link to='/myCourse'
+                                                                <Link
+                                                                    to="/myCourse"
                                                                     className="text-gray-600 dark:text-gray-500 cursor-pointer duration-300"
                                                                     onClick={() => setIsOpen(!isOpen)}
                                                                 >
                                                                     My Course
                                                                 </Link>
-                                                                <Link to='/cart'
+                                                                <Link
+                                                                    to="/cart"
                                                                     className="text-gray-600 dark:text-gray-500 cursor-pointer duration-300"
                                                                     onClick={() => setIsOpen(!isOpen)}
                                                                 >
                                                                     <div className="flex gap-24">
                                                                         <h1 className="w-4/5">My cart</h1>
-                                                                        <span>
-                                                                            {cartLength}
-                                                                        </span>
+                                                                        <span>{cartLength}</span>
                                                                     </div>
                                                                 </Link>
                                                                 <div
@@ -536,12 +499,11 @@ const Navbar = ({ searchTerm, setSearchTerm, isInstructor, setInstructor }) => {
                                                                     User Dashboard
                                                                 </div>
                                                             </>
-
                                                         )}
                                                     </li>
                                                     <li>
                                                         <div
-                                                            className="text-blue-600 dark:text-blue-500 hover:text-xl cursor-pointer duration-300"
+                                                            className="text-blue-600 dark:text-blue-500 cursor-pointer duration-300"
                                                             onClick={handlelogout}
                                                         >
                                                             Logout
@@ -549,7 +511,7 @@ const Navbar = ({ searchTerm, setSearchTerm, isInstructor, setInstructor }) => {
                                                     </li>
                                                     <li>
                                                         <div
-                                                            className="text-blue-600 dark:text-blue-500 hover:text-xl cursor-pointer duration-300"
+                                                            className="text-blue-600 dark:text-blue-500 cursor-pointer duration-300"
                                                             onClick={handleRefreshToken}
                                                         >
                                                             Refresh Token
@@ -559,20 +521,73 @@ const Navbar = ({ searchTerm, setSearchTerm, isInstructor, setInstructor }) => {
                                             )}
                                         </div>
                                     </div>
-
                                 )}
                             </div>
                         </div>
                     </div>
-
-
                 </div>
             </div>
+            <AnimatePresence initial={false}>
+                {isMenuOpen && (
+                    <div className="custom-mid:hidden shadow-lg">
+                        <div className="space-y-1 flex flex-col items-start">
+                            {!localStorage.getItem("accessToken") ? (
+                                <div className=" flex flex-col items-start w-full ">
+                                    <motion.div
+                                        className="md:hidden w-full flex flex-col"
+                                        initial={{ height: 0 }}
+                                        animate={{ height: isMenuOpen ? "auto" : 0 }}
+                                        exit={{ height: 0 }}
+                                        transition={{ duration: 0.3 }}
+                                        style={{ overflow: "hidden" }}
+                                    >
+                                        <Link
+                                            to="/login"
+                                            className={` sm:px-[33px] px-3 py-2 text-start text-cyan-600 dark:text-cyan-500 w-full cursor-pointer hover:bg-gray-100`}
+                                            onClick={() => {
+                                                handleCategoryClick("signin");
+                                                setShowDropdown(false);
+                                            }}
+                                        >
+                                            Sign In
+                                        </Link>
+                                        <Link
+                                            to="/register"
+                                            className={` sm:px-[33px] border-b border-gray-300 px-3 py-2 text-start text-cyan-600 dark:text-cyan-500 w-full cursor-pointer hover:bg-gray-100`}
+                                            onClick={() => setShowDropdown(false)}
+                                        >
+                                            Sign Up
+                                        </Link>
+                                        <CategoryShow isMobileView={true} />
+                                    </motion.div>
+                                </div>
+                            ) : (
+                                <div className="  flex flex-col items-start w-full">
+                                    <motion.div
+                                        className="md:hidden w-full"
+                                        initial={{ height: 0 }}
+                                        animate={{ height: isMenuOpen ? "auto" : 0 }}
+                                        exit={{ height: 0 }}
+                                        transition={{ duration: 0.3 }}
+                                        style={{ overflow: "hidden" }}
+                                    >
+                                        <div
+                                            className="sm:px-[33px] text-sm px-3 py-2 text-start text-cyan-600 dark:text-cyan-500 w-full cursor-pointer  hover:bg-gray-100"
+                                            onClick={handlelogout}
+                                        >
+                                            Logout
+                                        </div>
 
-            {
-                isMenuOpen && (
-                    <div className="md:hidden">
-                        <div className="space-y-1 px-2 pb-3 pt-2">
+                                        <div
+                                            className="sm:px-[33px] text-sm border-b border-gray-300 px-3 py-2 text-start text-cyan-600 dark:text-cyan-500 w-full cursor-pointer hover:bg-gray-100"
+                                            onClick={handleRefreshToken}
+                                        >
+                                            Refresh Token
+                                        </div>
+                                        <CategoryShow isMobileView={true} />
+                                    </motion.div>
+                                </div>
+                            )}
                             {/* {!localStorage.getItem('token') && (
                                 <div className="flex justify-around">
                                     <Link
@@ -627,10 +642,10 @@ const Navbar = ({ searchTerm, setSearchTerm, isInstructor, setInstructor }) => {
                             ))} */}
                         </div>
                     </div>
-                )
-            }
+                )}
+            </AnimatePresence>
         </nav>
-    )
-}
+    );
+};
 
 export default Navbar;
