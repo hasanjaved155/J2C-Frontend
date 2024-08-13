@@ -36,7 +36,7 @@ const App = () => {
   const [isInstructor, setInstructor] = useState(false);
   const [item, setItem] = useState("");
   const [rie, setRie] = useState(0);
-  // const [cartLength, setCartLength] = useState(0);
+
 
 
   const user = JSON.parse(localStorage.getItem('user'));
@@ -54,21 +54,6 @@ const App = () => {
     fetchPlaylist();
   }, []);
 
-  // const fetchCartDetails = async () => {
-  //   try {
-  //     const res = await axios.get(`/cart/get-cart/${user._id}`);
-  //     setCartLength(res?.data?.cart?.length)
-  //   } catch (err) {
-  //     console.error(`Failed to fetch cart details: ${err}`);
-  //   }
-  // };
-
-  // useEffect(() => {
-
-  //   fetchCartDetails();
-
-  // }, []);
-
 
   return (
     <div className='App'>
@@ -78,10 +63,9 @@ const App = () => {
 
           searchTerm={searchTerm}
           setSearchTerm={setSearchTerm}
-          // cartLength={cartLength}
-          // setCartLength={setCartLength}
-          isInstructor={isInstructor}
-          setInstructor={setInstructor}
+
+        // isInstructor={isInstructor}
+        // setInstructor={setInstructor}
 
 
         >
@@ -90,7 +74,7 @@ const App = () => {
               <Home
 
                 // setCartLength={setCartLength}
-                setInstructor={setInstructor}
+                // setInstructor={setInstructor}
                 setItem={setItem}
               />
             }
@@ -117,8 +101,6 @@ const App = () => {
               path="/drop-dashboard"
               element={<DropDashboard
 
-                // cartLength={cartLength}
-                // setCartLength={setCartLength}
                 setItem={setItem}
 
               />}
@@ -136,19 +118,25 @@ const App = () => {
             <Route path="/cart" element={<CartPage />} />
             <Route path='/checkout' element={<Checkout />} />
             <Route path='/register' element={<Register />} />
-            <Route path='/login' element={<Login setInstructor={setInstructor} />} />
+            <Route path='/login' element={<Login
+            //  setInstructor={setInstructor} 
+
+            />} />
             <Route path='/create' element={<CreateCourse />} />
             <Route path="/help" element={<Help />} />
 
 
             <Route path="/teach" element={<J2CInstructor
-              isInstructor={isInstructor}
-              setInstructor={setInstructor} />} />
+            // isInstructor={isInstructor}
+            // setInstructor={setInstructor}
+            />} />
 
             <Route element={<ProtectedInstructor />}>
               <Route path="/teachins" element={<Instructor
-                isInstructor={isInstructor}
-                setInstructor={setInstructor} />} />
+              // isInstructor={isInstructor}
+              // setInstructor={setInstructor}
+
+              />} />
               <Route path="/instructor_course" element={<InstructorCreateCourse />} />
 
             </Route>

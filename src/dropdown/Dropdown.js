@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 
 import toast from "react-hot-toast";
 import { useCourse } from "../Contexts/CourseContext";
+
 const Dropdown = ({
   showDropDashboard,
   showDropdown,
@@ -68,10 +69,11 @@ const Dropdown = ({
       <div>
         <div className="relative">
           <button
-            className="text-gray-900 text-xl flex items-center"
+            className="text-gray-900 text-base flex items-center"
             onClick={toggleDropdown}
-            style={{ fontSize: "1.10rem" }}>
-            <span>Categories</span>
+          // style={{ fontSize: "1.10rem" }}
+          >
+            <span className="hidden custom-mid:block">Categories</span>
             {/* <svg
               className={`h-4 w-4 ml-1 transition-transform duration-200 transform ${showDropdown ? "rotate-180" : ""
                 }`}
@@ -94,7 +96,8 @@ const Dropdown = ({
                 // backgroundColor: "rgb(58 71 91)",
 
                 marginLeft: "-21px",
-              }}>
+              }}
+            >
               {/* <div
                 className="w-24 ml-14 lg:hidden mt-4 rounded-full bg-black flex items-center "
                 onClick={toggleDropdown}

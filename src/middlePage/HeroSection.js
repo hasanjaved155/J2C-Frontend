@@ -30,10 +30,9 @@ const HeroSection = ({ savedItem }) => {
     return (
         <section className="w-full text-start grid grid-cols-12 md:grid-cols-12 gap-8 max-w-6xl mx-auto">
             <div className="col-span-8 flex flex-col">
-                <span className="block mb-8 text-xl md:text-xl text-black font-extrabold uppercase">
-                    {savedItem?.courseName}
-                </span>
-                <div className="border-2 rounded-lg p-7 border-black">
+
+
+                <div className="border-2 rounded-lg p-7 mt-32 border-black">
                     <h3 className="text-xl md:text-xl font-bold">
                         What will you Learn
                     </h3>
@@ -51,8 +50,20 @@ const HeroSection = ({ savedItem }) => {
                         folderId={savedItem?.folderId}
                     />
                 </div>
+
+                <div className="bg-white p-6">
+                    <h2 className="text-xl font-semibold mb-4">Requirements</h2>
+                    <ul className="list-disc list-inside space-y-2 text-gray-700">
+                        <li>No programming experience needed — I'll teach you everything you need to know</li>
+                        <li>A Mac or PC computer with access to the internet</li>
+                        <li>No paid software required - all websites will be created with VS Code (which is free)</li>
+                        <li>I'll walk you through, step-by-step how to get all the software installed and set up</li>
+                    </ul>
+                </div>
+
             </div>
-            <div className="shadow-xl bg-slate-100 rounded-xl col-span-4 overflow-hidden h-[40.7rem] mt-14">
+
+            <div className="shadow-xl bg-slate-100 rounded-xl col-span-4 overflow-hidden -mt-80 h-[40.7rem]">
                 <div>
                     <img
                         className="rounded-xl h-48 w-full shadow-gray-400 shadow-xl"

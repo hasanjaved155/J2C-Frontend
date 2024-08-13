@@ -12,22 +12,25 @@ import axios from "axios";
 import images from "../images copy/pcs logo.png";
 // import { EffectCoverflow, Pagination } from 'swiper/modules';
 
-
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { EffectCoverflow, Pagination, Navigation } from 'swiper/modules';
-import 'swiper/css';
-import 'swiper/css/effect-coverflow';
-import 'swiper/css/pagination';
-import 'swiper/css/navigation'
-import { slidesData } from './../HomePage/SliderVariables';
-import { styled } from 'styled-components';
+import { Swiper, SwiperSlide } from "swiper/react";
+import { EffectCoverflow, Pagination, Navigation } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/effect-coverflow";
+import "swiper/css/pagination";
+import "swiper/css/navigation";
+import { slidesData } from "./../HomePage/SliderVariables";
+import { styled } from "styled-components";
 import { CategoryShow } from "../HomePage/CategoryShow";
 import { useCart } from "../Contexts/CartContext";
-const Home = ({ setInstructor, setItem }) => {
+import NewCarousal from "../HomePage/NewCarousal";
+import { useRemain } from "../Contexts/RemainingContext";
+// import NewCarousal from "../HomePage/newcarousal";
+const Home = ({ setItem }) => {
     const { setCartLength } = useCart();
+    const { setInstructor } = useRemain();
 
     const [categories, setCategories] = useState([]);
-    const user = JSON.parse(localStorage.getItem('user'));
+    const user = JSON.parse(localStorage.getItem("user"));
 
     const categoryData = async () => {
         try {
@@ -41,47 +44,41 @@ const Home = ({ setInstructor, setItem }) => {
         categoryData();
     }, []);
 
-    const checkInstructorStatus = async () => {
-        try {
-            const res = await axios.get(`/teach/checkInstructor/${user?.email}`);
-            if (res?.data && res?.data?.success) {
-                const instructor = res.data.instructor;
-                // Check if the instructor has access
-                if (instructor?.access === true) {
-                    setInstructor(true);
-                } else {
-                    setInstructor(false);
-                }
-
-            } else {
-                setInstructor(false);
-
-            }
-        } catch (error) {
-            // toast.error('Fill the form of instructor');
-        }
-    };
+    // const checkInstructorStatus = async () => {
+    //     try {
+    //         const res = await axios.get(`/teach/checkInstructor/${user?.email}`);
+    //         if (res?.data && res?.data?.success) {
+    //             const instructor = res.data.instructor;
+    //             // Check if the instructor has access
+    //             if (instructor?.access === true) {
+    //                 setInstructor(true);
+    //             } else {
+    //                 setInstructor(false);
+    //             }
+    //         } else {
+    //             setInstructor(false);
+    //         }
+    //     } catch (error) {
+    //         // toast.error('Fill the form of instructor');
+    //     }
+    // };
 
     const fetchCartDetails = async () => {
         try {
             const res = await axios.get(`/cart/get-cart/${user._id}`);
-            setCartLength(res?.data?.cart?.length)
+            setCartLength(res?.data?.cart?.length);
         } catch (err) {
             console.error(`Failed to fetch cart details: ${err}`);
         }
     };
 
     useEffect(() => {
-
         fetchCartDetails();
-        checkInstructorStatus();
-
+        // checkInstructorStatus();
     }, []);
-
 
     return (
         <div className="bg-white text-white">
-
             <div className="flex">
                 {/* Sidebar */}
                 {/* <div className="w-48 bg-gray-800 h-screen p-4">
@@ -241,7 +238,7 @@ const Home = ({ setInstructor, setItem }) => {
                                 pagination={{ clickable: true }}
                                 navigation={true}
                                 modules={[Pagination, Navigation]}
-                                style={{ width: '100%' }}
+                                style={{ width: "100%" }}
                             >
                                 {slidesData.map((slide, index) => (
                                     <SwiperSlide
@@ -257,14 +254,31 @@ const Home = ({ setInstructor, setItem }) => {
                                                 <img
                                                     src={slide?.image}
                                                     alt=""
-                                                    style={{ display: 'block' }}
+                                                    style={{ display: "block" }}
                                                     className="object-fit aspect-video w-[100rem] h-[30rem]"
                                                 />
                                             </div>
                                         </div>
-                                        <div className="detail font-semibold text-center" style={{ padding: '25px 20px' }}>
-                                            <h3 style={{ margin: '0', fontSize: '20px', color: 'black' }}>{slide?.name}</h3>
-                                            <span style={{ display: 'block', fontSize: '16px', color: '#f44336' }}>
+                                        <div
+                                            className="detail font-semibold text-center"
+                                            style={{ padding: "25px 20px" }}
+                                        >
+                                            <h3
+                                                style={{
+                                                    margin: "0",
+                                                    fontSize: "20px",
+                                                    color: "black",
+                                                }}
+                                            >
+                                                {slide?.name}
+                                            </h3>
+                                            <span
+                                                style={{
+                                                    display: "block",
+                                                    fontSize: "16px",
+                                                    color: "#f44336",
+                                                }}
+                                            >
                                                 {slide?.title}
                                             </span>
                                         </div>
@@ -277,28 +291,29 @@ const Home = ({ setInstructor, setItem }) => {
             </div>
             <div>
                 <div>
-                    {categories?.slice(0, 1).map((item) => (
+                    {categories?.slice(0, 3).map((item) => (
                         <div key={item?._id}>
                             <div>
-                                <h1 className="font-bold text-xl text-black">{item?.categoryName}</h1>
+                                <h1 className="font-bold text-xl text-black mt-5">
+                                    {item?.categoryName}
+                                </h1>
                             </div>
-                            <div>
-                                <Carousel
+                            <div className="pb-12 px-10">
+                                {/* <Carousel
                                     id={item?._id}
                                     setItem={setItem}
-                                />
+                                /> */}
+                                <NewCarousal id={item?._id} setItem={setItem} />
                             </div>
                         </div>
                     ))}
                 </div>
             </div>
         </div>
+    );
+};
 
-    )
-}
-
-export default Home
-
+export default Home;
 
 const NavigationButton = styled.div`
   .swiper-button-prev,

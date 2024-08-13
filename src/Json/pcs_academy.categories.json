@@ -69,6 +69,9 @@
   "subcategories": [
     {
       "$oid": "66198ded5dfe1e0e271752dd"
+    },
+    {
+      "$oid": "667b081a63a0faa2f37bd030"
     }
   ],
   "__v": 0
@@ -105,26 +108,14 @@
 },
 {
   "_id": {
-    "$oid": "6644d0cb0ec8650cc41be977"
-  },
-  "categoryName": "Marketing",
-  "subcategories": [],
-  "__v": 0
-},
-{
-  "_id": {
     "$oid": "6644d0f00ec8650cc41be98d"
   },
   "categoryName": "Lifestyle",
-  "subcategories": [],
-  "__v": 0
-},
-{
-  "_id": {
-    "$oid": "6644d11b0ec8650cc41be98f"
-  },
-  "categoryName": "Personal Development",
-  "subcategories": [],
+  "subcategories": [
+    {
+      "$oid": "6684027e9fee8824cb630569"
+    }
+  ],
   "__v": 0
 },
 {
@@ -140,7 +131,11 @@
     "$oid": "6644d1740ec8650cc41be9b9"
   },
   "categoryName": "Health & Fitness",
-  "subcategories": [],
+  "subcategories": [
+    {
+      "$oid": "668402d89fee8824cb63057e"
+    }
+  ],
   "__v": 0
 },
 {

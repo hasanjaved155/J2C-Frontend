@@ -4,8 +4,11 @@ import InstructorForm from './InstructorForm';
 import toast from 'react-hot-toast';
 import axios from 'axios';
 import InstructorAnimation from './InstructorAnimation';
+import { useRemain } from '../Contexts/RemainingContext';
 
-const Instructor = ({ isInstructor, setInstructor }) => {
+const Instructor = () => {
+
+    const { isInstructor, setInstructor } = useRemain();
 
     const [email, setEmail] = useState("");
     const [phone, setPhone] = useState("");
@@ -41,7 +44,7 @@ const Instructor = ({ isInstructor, setInstructor }) => {
 
 
     useEffect(() => {
-        checkInstructorStatus();
+        // checkInstructorStatus();
         setEmail(user?.email)
     }, [])
 
