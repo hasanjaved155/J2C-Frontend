@@ -291,7 +291,7 @@ const Home = ({ setItem }) => {
             </div>
             <div>
                 <div>
-                    {categories?.slice(0, 3).map((item) => (
+                    {categories?.slice(2, 3).map((item) => (
                         <div key={item?._id}>
                             <div>
                                 <h1 className="font-bold text-xl text-black mt-5">
