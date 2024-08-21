@@ -9,12 +9,14 @@ export const slidesData = [
     },
     {
         image: require("../images copy/image2.png"),
-        name: "Kelly Woods",
-        title: "Web Designer"
+        name: "Alok Halder",
+
+        title: "Founder"
     },
     {
         image: require("../images copy/image3.png"),
-        name: "Roger Rice",
-        title: "Web Designer"
+        name: "Alok Halder",
+
+        title: "Founder"
     },
 ];
