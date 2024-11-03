@@ -1,28 +1,30 @@
-import axios from 'axios';
-import React, { useEffect, useState } from 'react';
-import toast from 'react-hot-toast';
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import toast from "react-hot-toast";
+import { Flex, Rate } from "antd";
+const desc = ["terrible", "bad", "normal", "good", "wonderful"];
 
-const Review2 = ({ id, setRie }) => {
-    const [ratingValue, setRatingValue] = useState('');
-    const [review, setReview] = useState('');
+const Review2 = ({ id, setRie, width }) => {
+    const [ratingValue, setRatingValue] = useState("");
+    const [review, setReview] = useState("");
     const [flipped, setFlipped] = useState(false);
     const [sent, setSent] = useState(false);
-    const [rating, setRating] = useState(0);
-    const [comment, setComment] = useState('');
+    // const [rating, setRating] = useState(0);
+    const [comment, setComment] = useState("");
     const [reviews, setReviews] = useState([]);
 
+    const [rating, setRating] = useState(3);
     const user = JSON.parse(localStorage.getItem("user"));
 
-    const hoverColors = ['red', 'orange', 'yellow', 'chartreuse', 'lime'];
-    const emoticons = ['😡', '😟', '😐', '😊', '🥳'];
+    const hoverColors = ["red", "orange", "yellow", "chartreuse", "lime"];
+    const emoticons = ["😡", "😟", "😐", "😊", "🥳"];
     const satisfactionTxt = [
-        'Highly Unsatisfied',
-        'Slightly Unsatisfied',
-        'Feeling Indifferent',
-        'Quite Satisfied',
-        'Extremely Satisfied',
+        "Highly Unsatisfied",
+        "Slightly Unsatisfied",
+        "Feeling Indifferent",
+        "Quite Satisfied",
+        "Extremely Satisfied",
     ];
-
 
     const handleSubmit = async (e) => {
         try {
@@ -32,7 +34,7 @@ const Review2 = ({ id, setRie }) => {
             const res = await axios.post(`/review/${id}/reviews`, {
                 username: user?.name,
                 rating: rating,
-                comment: comment
+                comment: comment,
             });
             if (res && res?.data?.success) {
                 toast.success(res.data.message);
@@ -45,7 +47,7 @@ const Review2 = ({ id, setRie }) => {
             // setComment('');
         } catch (error) {
             // Handle errors if any
-            console.error('Error submitting review:', error);
+            console.error("Error submitting review:", error);
         }
     };
 
@@ -58,7 +60,7 @@ const Review2 = ({ id, setRie }) => {
             }
         } catch (error) {
             // Handle errors if any
-            console.error('Error fetching reviews:', error);
+            console.error("Error fetching reviews:", error);
         }
     };
 
@@ -80,7 +82,11 @@ const Review2 = ({ id, setRie }) => {
             // Show stars according to the rounded count
             for (let i = 0; i < 5; i++) {
                 if (i < roundedCount) {
-                    stars.push(<span key={i} className="text-yellow-400 ">&#9733;</span>);
+                    stars.push(
+                        <span key={i} className="text-yellow-400 ">
+                            &#9733;
+                        </span>
+                    );
                 } else {
                     stars.push(<span key={i}>&#9734;</span>);
                 }
@@ -102,27 +108,30 @@ const Review2 = ({ id, setRie }) => {
         } else {
             return "Critical";
         }
-    }
+    };
 
     const getInitials = (name) => {
-        if (!name) return '';
+        if (!name) return "";
 
-        const nameArray = name.split(' ');
+        const nameArray = name.split(" ");
         if (nameArray.length === 1) {
             return nameArray[0].slice(0, 1).toUpperCase();
         }
 
-        return nameArray[0]?.slice(0, 1).toUpperCase() + nameArray[1]?.slice(0, 1).toUpperCase();
+        return (
+            nameArray[0]?.slice(0, 1).toUpperCase() +
+            nameArray[1]?.slice(0, 1).toUpperCase()
+        );
     };
 
     const reverseValue = (value) => 100 - value;
 
     const handleStarClick = (i) => {
-        setRating((i + 1));
+        setRating(i + 1);
     };
 
     const handleInputChange = (e) => {
-        let value = e.target.value === '' ? '' : parseFloat(e.target.value);
+        let value = e.target.value === "" ? "" : parseFloat(e.target.value);
         if (value < 0) value = 0;
         if (value > 5) value = 5;
         setRating(value);
@@ -130,67 +139,109 @@ const Review2 = ({ id, setRie }) => {
 
     const userRating = {
         RatingValue: ratingValue,
-        satisfaction: ratingValue ? satisfactionTxt[Math.min(Math.floor(ratingValue / 2 - 0.5), 4)] : '',
+        satisfaction: ratingValue
+            ? satisfactionTxt[Math.min(Math.floor(ratingValue / 2 - 0.5), 4)]
+            : "",
         review: review,
     };
 
-
-
     return (
-        <div className='flex mt-3'>
-            <div className="h-96  ml-3 mb-3 w-[30rem] bg-darkBlue text-whitesmoke flex flex-col rounded-lg items-center">
-                <header className="flex justify-between items-center sticky top-0 z-20 border-b-2 bg-darkBlue text-lightBlue shadow-lg">
-                    <span className="text-xl text-yellow-500">⭐</span>
-                    <h1 className="text-3xl">Review & Rating</h1>
-                    <span className="text-xl text-yellow-500">⭐</span>
-                </header>
+        <div className="mt-3 px-14 mb-20 ">
+            <h1 className="text-start font-semibold text-xl font-lato text-slate-700 mt-20 mb-6">
+                Reviews
+            </h1>
+            <div
+                className="grid sm:grid-cols-2 custom-1000:grid-cols-3 gap-8 mb-20 w-full"
+            // style={{ width: width ? `${width}px` : "auto" }}
+            >
+                {reviews?.map((review, index) => (
+                    <div key={index} className="h-full">
+                        <div className="rounded-lg py-2 px-3 bg-zinc-100/90 border h-full">
+                            <div className=" flex justify-between ">
+                                <div className="flex items-center gap-4">
+                                    <div className="w-12 h-12 rounded-full border bg-slate-800 border-black flex justify-center items-center text-2xl text-white">
+                                        {/* <img src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" /> */}
+
+                                        {getInitials(review?.username)}
+                                    </div>
+                                    <div className="flex flex-col justify-between items-start">
+                                        <h2 className="text-lg">{review?.username}</h2>
+                                        <h4 className="text-lg font-lato text-gray-600">
+                                            {renderStars(review?.rating)}
+                                            {/* {textRating(review?.rating)} */}
+                                        </h4>
+                                    </div>
+                                </div>
+                            </div>
+                            <p className="text-lg text-start mt-3">{review?.comment}</p>
+                        </div>
+                    </div>
+                ))}
+            </div>
+            <div className="w-full mb-3 border-2 py-10  text-zinc-800 flex flex-col rounded-lg items-center">
+                {/* <h1 className="text-3xl">Review & Rating</h1> */}
+
                 <main className="flex-grow flex items-center justify-center">
                     {!sent ? (
                         <div
-                            className={`relative rounded-lg shadow-lg transform transition-transform duration-700 ${flipped ? 'rotate-y-180' : ''
+                            className={`relative rounded-lg  transform transition-transform duration-700 ${flipped ? "rotate-y-180" : ""
                                 }`}
                         >
                             <div
-                                className={`inset-0  rounded-lg bg-darkBlue grid place-items-center ${flipped ? 'hidden' : ''
+                                className={`inset-0  rounded-lg  grid place-items-center ${flipped ? "hidden" : ""
                                     }`}
                             >
-                                <h2 className="text-xl mb-4">Please Rate Us</h2>
-                                <div className="text-xl mb-2">{rating ? emoticons[Math.min(Math.floor(rating / 2 - 0.5), 4)] : ' '}</div>
-                                <p className="mb-4">{rating ? satisfactionTxt[Math.min(Math.floor(rating / 2 - 0.5), 4)] : ' '}</p>
-                                <div className="relative flex items-center cursor-pointer user-select-none">
-                                    <div className="filled-stars text-transparent bg-clip-text bg-gradient-to-r from-red-500 via-yellow-500 to-green-500 flex">
-                                        <span className="text-2xl">⭐</span>
-                                        <span className="text-2xl">⭐</span>
-                                        <span className="text-2xl">⭐</span>
-                                        <span className="text-2xl">⭐</span>
-                                        <span className="text-2xl">⭐</span>
-                                    </div>
-                                    <div
-                                        className="absolute inset-y-0 right-0 bg-darkBlue transition-width duration-300"
-                                        style={{ width: `${reverseValue(rating * 20)}%` }}
-                                    >
-
-                                    </div>
-                                    <div className="absolute flex  justify-between">
-                                        {hoverColors.map((color, i) => (
-                                            <span
-                                                key={i}
-                                                className="text-3xl mr-[8.8px] cursor-pointer transition-colors duration-300"
-                                                style={{
-                                                    color: rating >= (i + 1) ? color : 'transparent',
-                                                    WebkitTextStroke: rating >= (i + 1) ? 'none' : '0.5px gray',
-                                                    opacity: "70%"
-                                                }}
-                                                onClick={() => handleStarClick(i)}
-                                            >
-                                                &#x2730;
-                                            </span>
-                                        ))}
-                                    </div>
-
-
-
-                                </div>
+                                <h2 className="text-3xl mb-4 ">Please Rate Us</h2>
+                                {/* <div className="text-xl mb-2">
+                  {rating
+                    ? emoticons[Math.min(Math.floor(rating / 2 - 0.5), 4)]
+                    : " "}
+                </div>
+                <p className="mb-4">
+                  {rating
+                    ? satisfactionTxt[Math.min(Math.floor(rating / 2 - 0.5), 4)]
+                    : " "}
+                </p> */}
+                                {/* <div className="relative flex items-center cursor-pointer user-select-none">
+                  <div className="filled-stars text-transparent bg-clip-text bg-gradient-to-r from-red-500 via-yellow-500 to-green-500 flex">
+                    <span className="text-2xl">⭐</span>
+                    <span className="text-2xl">⭐</span>
+                    <span className="text-2xl">⭐</span>
+                    <span className="text-2xl">⭐</span>
+                    <span className="text-2xl">⭐</span>
+                  </div>
+                  <div
+                    className="absolute inset-y-0 right-0 transition-width duration-300"
+                    style={{ width: `${reverseValue(rating * 20)}%` }}
+                  ></div>
+                  <div className="absolute flex  justify-between">
+                    {hoverColors.map((color, i) => (
+                      <span
+                        key={i}
+                        className="text-3xl mr-[8.8px] cursor-pointer transition-colors duration-300"
+                        style={{
+                          color: rating >= i + 1 ? color : "transparent",
+                          WebkitTextStroke:
+                            rating >= i + 1 ? "none" : "0.5px gray",
+                          opacity: "100%",
+                        }}
+                        onClick={() => handleStarClick(i)}
+                      >
+                        &#x2730;
+                      </span>
+                    ))}
+                  </div>
+                </div> */}
+                                <Flex gap="middle" vertical >
+                                    <Rate
+                                        tooltips={desc}
+                                        onChange={setRating}
+                                        value={rating}
+                                        className="text-2xl text-yellow-500"
+                                        allowClear={false}
+                                    />
+                                    {rating ? <span className="text-xl">{desc[rating - 1]}</span> : null}
+                                </Flex>
                                 <input
                                     type="number"
                                     step="0.1"
@@ -198,23 +249,25 @@ const Review2 = ({ id, setRie }) => {
                                     max="10"
                                     value={rating}
                                     onChange={handleInputChange}
-                                    className="mt-4  p-2 bg-transparent border-2 border-darkGray rounded-lg text-center text-lg outline-none transition-border duration-300 focus:border-lightBlue"
+                                    className="mt-4 p-2  text-center text-lg outline-none transition-border duration-300 focus:border-lightBlue"
                                     placeholder="1 - 5"
                                 />
                                 <button
                                     onClick={() => setFlipped(true)}
-                                    className="mt-6 px-4 py-2 bg-lightBlue text-darkBlue font-semibold rounded-lg transition-shadow duration-300 hover:shadow-lg"
+                                    className="mt-6 px-4 py-2 text-xl bg-cyan-600 text-white rounded transition-shadow duration-300 hover:shadow-lg font-lato"
                                 >
                                     Write Review
                                 </button>
                             </div>
                             <div
-                                className={` inset-0 rounded-lg bg-darkBlue p-6 grid place-items-center ${flipped ? 'block' : 'hidden'
+                                className={` inset-0 rounded-lg  p-6 grid place-items-center ${flipped ? "block" : "hidden"
                                     }`}
                             >
-
                                 <h2 className="text-2xl mb-4">Write Review</h2>
-                                <p className=" text-center mb-3 w-84">Please share your thoughts about our course, so we can serve you better.</p>
+                                <p className=" text-center mb-3 w-84">
+                                    Please share your thoughts about our course, so we can serve
+                                    you better.
+                                </p>
                                 <textarea
                                     value={comment}
                                     onChange={(e) => setComment(e.target.value)}
@@ -223,7 +276,7 @@ const Review2 = ({ id, setRie }) => {
                                 ></textarea>
                                 <button
                                     onClick={handleSubmit}
-                                    className="mt-6 px-4 py-2 bg-lightBlue text-darkBlue font-semibold rounded-lg transition-shadow duration-300 hover:shadow-lg"
+                                    className="mt-6 px-4 py-2 text-darkBlue font-semibold rounded-lg transition-shadow duration-300 hover:shadow-lg"
                                 >
                                     Rate Us
                                 </button>
@@ -245,43 +298,13 @@ const Review2 = ({ id, setRie }) => {
                                     setComment("");
                                     setRating(0);
                                 }}
-                                className="mt-6 px-4 py-2 bg-lightBlue text-darkBlue font-semibold rounded-lg transition-shadow duration-300 hover:shadow-lg"
+                                className="mt-6 px-4 py-2 text-xl bg-cyan-600 text-white font-semibold rounded-lg transition-shadow duration-300 hover:shadow-lg"
                             >
                                 Go Back
                             </button>
                         </div>
                     )}
                 </main>
-
-            </div>
-
-            <div className="carousel px-8 w-[70%]">
-                {reviews?.map((review, index) => (
-                    <div>
-                        <div className="bg-[#f1e3dd] shadow-xl mr-5 h-[95%] w-80 rounded-lg p-6">
-
-                            <div className="avatar flex justify-evenly ">
-                                <div className="w-16 h-16  rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
-                                    {/* <img src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" /> */}
-
-                                    <div className="text-2xl absolute px-4 py-3">
-                                        {getInitials(review?.username)}
-                                    </div>
-                                </div>
-                                <h2 className="card-title">{review?.username}</h2>
-                            </div>
-
-                            <div key={index} className="card-body flex items-start mt-4">
-
-                                <h4 className="text-xl font-bold text-gray-600">{textRating(review?.rating)} {renderStars(review?.rating)}</h4>
-                                <p className='text-lg'>{review?.comment}</p>
-
-                            </div>
-
-                        </div>
-                    </div>
-                ))}
-
             </div>
         </div>
     );

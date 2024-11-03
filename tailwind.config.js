@@ -3,6 +3,9 @@ module.exports = {
   content: ["./src/**/*.{html,js,jsx}"],
   theme: {
     extend: {
+      fontFamily: {
+        lato: ["Lato", "sans-serif"],
+      },
       colors: {
         darkBlue: '#03000f',
         lightBlue: '#43a6c6',
@@ -18,6 +21,16 @@ module.exports = {
       screens: {
         'custom-mid': '810px'
       },
+      screens: {
+        "custom-400": "400px",
+        "custom-420": "420px",
+        "custom-700": "700px",
+        "custom-mid": "810px",
+        "custom-1000": "1000px",
+        "custom-1050": "1050px",
+        "custom-950": "950px",
+      },
+
     },
   },
   plugins: [require("daisyui")],

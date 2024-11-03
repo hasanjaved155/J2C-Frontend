@@ -24,6 +24,8 @@ import J2CInstructor from './Instructor/J2CInstructor';
 import Home from './pages/Home';
 import InstructorCreateCourse from './Instructor/InstructorCreateCourse';
 import MyCourse from './UserMyCourse/MyCourse';
+import { useTranslation } from 'react-i18next';
+import i18n from './Language/i18n';
 
 axios.defaults.baseURL = "http://localhost:5000";
 
@@ -36,6 +38,12 @@ const App = () => {
   const [isInstructor, setInstructor] = useState(false);
   const [item, setItem] = useState("");
   const [rie, setRie] = useState(0);
+
+  const { t } = useTranslation()
+
+  useEffect(() => {
+    document.body.dir = i18n.dir()
+  }, [i18n, i18n.language])
 
 
 

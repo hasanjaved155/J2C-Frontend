@@ -163,7 +163,7 @@ const NewCarousal = ({ id, setItem }) => {
                                     <div className="flex items-center justify-between mt-2">
                                         <div className="flex items-center justify-start gap-1">
                                             <p className=" text-sm font-bold text-zinc-800">
-                                                {item?.finalRating ?? "No Rating"}
+                                                {item?.finalRating.toFixed(1) ?? "No Rating"}
                                             </p>
                                             <div className="flex items-center">
                                                 {[1, 2, 3, 4, 5].map((rating) => (
