@@ -316,6 +316,9 @@ const Navbar = ({ searchTerm, setSearchTerm }) => {
                             >
                                 <MenuIcon className="block h-6 w-6" aria-hidden="true" />
                             </button>
+
+
+
                             <Link
                                 to="/"
                                 className="flex-shrink-0 items-center  hidden custom-mid:block"
@@ -351,17 +354,31 @@ const Navbar = ({ searchTerm, setSearchTerm }) => {
                                     onSubmit={handleSearch}
                                 />
                             </form>
+
+
+
+
                         </div>
-                        <Link
-                            to="/"
-                            className="flex-shrink-0 items-center block custom-mid:hidden"
-                            onClick={() => {
-                                setShowDropdown(false);
-                                handlePathChange("/");
-                            }}
-                        >
-                            <img className="h-10" src={images} alt="Your Company" />
-                        </Link>
+
+                        <div className="block custom-mid:hidden">
+
+                            <form
+                                onSubmit={handleSearch}
+                                className=" bg-gray-50 h-10 w-60 flex items-center rounded-full p-1 text-gray-800 border border-gray-600 "
+                            >
+                                <SearchIcon className="h-5 mx-2" />
+                                <input
+                                    type="text"
+                                    placeholder="Search For Anything"
+                                    className="bg-transparent text-gray-800 text-sm outline-none flex-grow"
+                                    value={searchTerm}
+                                    onChange={(e) => setSearchTerm(e.target.value)}
+                                    onClick={() => setShowDropdown(false)}
+                                    onSubmit={handleSearch}
+                                />
+                            </form>
+                        </div>
+
                         <div className="flex items-center">
                             {navigation.map((item) => (
                                 <Link
@@ -399,23 +416,21 @@ const Navbar = ({ searchTerm, setSearchTerm }) => {
                                 className="flex items-center justify-end space-x-1 sm:ml-6 sm:space-x-4"
                                 onClick={() => setShowDropdown(false)}
                             >
-                                <div className="flex items-center">
-                                    <Link
-                                        to="/cart"
-                                        type="button"
-                                        className="p-2 rounded-full  text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:text-green-600 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-green-700"
-                                    >
-                                        <ShoppingCartIcon className="h-6 w-6" aria-hidden="true" />
-                                    </Link>
-                                    <span className="bg-red-600 border-red-800 h-5 w-5 ml-[-10px] font-semibold text-white rounded-full flex items-center justify-center">
-                                        {cartLength}
-                                    </span>
+
+                                <div className="hidden  custom-mid:block">
+                                    <div className="flex items-center">
+                                        <Link
+                                            to="/cart"
+                                            type="button"
+                                            className="p-2 rounded-full  text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:text-green-600 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-green-700"
+                                        >
+                                            <ShoppingCartIcon className="h-6 w-6" aria-hidden="true" />
+                                        </Link>
+                                        <span className="bg-red-600 border-red-800 h-5 w-5 ml-[-10px] font-semibold text-white rounded-full flex items-center justify-center">
+                                            {cartLength}
+                                        </span>
+                                    </div>
                                 </div>
-
-
-
-
-
                                 {!localStorage.getItem("accessToken") ? (
                                     <div className="flex space-x-4">
                                         <Link
@@ -547,6 +562,18 @@ const Navbar = ({ searchTerm, setSearchTerm }) => {
                 {isMenuOpen && (
                     <div className="custom-mid:hidden shadow-lg">
                         <div className="space-y-1 flex flex-col items-start">
+                            <div className="ml-20">
+                                <Link
+                                    to="/"
+                                    className="flex-shrink-0 items-center block custom-mid:hidden"
+                                    onClick={() => {
+                                        setShowDropdown(false);
+                                        handlePathChange("/");
+                                    }}
+                                >
+                                    <img className="h-10" src={images} alt="Your Company" />
+                                </Link>
+                            </div>
                             {!localStorage.getItem("accessToken") ? (
                                 <div className=" flex flex-col items-start w-full ">
                                     <motion.div
@@ -574,6 +601,20 @@ const Navbar = ({ searchTerm, setSearchTerm }) => {
                                         >
                                             Sign Up
                                         </Link>
+                                        <div>
+                                            <div className="flex items-center">
+                                                <Link
+                                                    to="/cart"
+                                                    type="button"
+                                                    className="p-2 rounded-full  text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:text-green-600 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-green-700"
+                                                >
+                                                    <ShoppingCartIcon className="h-6 w-6" aria-hidden="true" />
+                                                </Link>
+                                                <span className="bg-red-600 border-red-800 h-5 w-5 ml-[-10px] font-semibold text-white rounded-full flex items-center justify-center">
+                                                    {cartLength}
+                                                </span>
+                                            </div>
+                                        </div>
                                         <CategoryShow isMobileView={true} />
                                     </motion.div>
                                 </div>
@@ -599,6 +640,21 @@ const Navbar = ({ searchTerm, setSearchTerm }) => {
                                             onClick={handleRefreshToken}
                                         >
                                             Refresh Token
+                                        </div>
+
+                                        <div>
+                                            <div className="flex items-center">
+                                                <Link
+                                                    to="/cart"
+                                                    type="button"
+                                                    className="p-2 rounded-full  text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:text-green-600 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-green-700"
+                                                >
+                                                    <ShoppingCartIcon className="h-6 w-6" aria-hidden="true" />
+                                                </Link>
+                                                <span className="bg-red-600 border-red-800 h-5 w-5 ml-[-10px] font-semibold text-white rounded-full flex items-center justify-center">
+                                                    {cartLength}
+                                                </span>
+                                            </div>
                                         </div>
                                         <CategoryShow isMobileView={true} />
                                     </motion.div>
