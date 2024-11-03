@@ -25,7 +25,7 @@ import Home from './pages/Home';
 import InstructorCreateCourse from './Instructor/InstructorCreateCourse';
 import MyCourse from './UserMyCourse/MyCourse';
 
-axios.defaults.baseURL = "http://localhost:5000";
+
 
 // axios.defaults.baseURL = "http://localhost:5000";
 axios.defaults.baseURL = "https://j2-c-backend.vercel.app/";
