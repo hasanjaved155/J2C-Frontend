@@ -24,8 +24,13 @@ import { CategoryShow } from "../HomePage/CategoryShow";
 import { useCart } from "../Contexts/CartContext";
 import NewCarousal from "../HomePage/NewCarousal";
 import { useRemain } from "../Contexts/RemainingContext";
+
+import { useTranslation } from "react-i18next";
+
+
 // import NewCarousal from "../HomePage/newcarousal";
 const Home = ({ setItem }) => {
+    const { t } = useTranslation();
     const { setCartLength } = useCart();
     const { setInstructor } = useRemain();
 
@@ -279,7 +284,7 @@ const Home = ({ setItem }) => {
                                                     color: "#f44336",
                                                 }}
                                             >
-                                                {slide?.title}
+                                                {t(slide?.title)}
                                             </span>
                                         </div>
                                     </SwiperSlide>
@@ -291,11 +296,11 @@ const Home = ({ setItem }) => {
             </div>
             <div>
                 <div>
-                    {categories?.slice(2, 3).map((item) => (
+                    {categories?.slice(0, 3).map((item) => (
                         <div key={item?._id}>
                             <div>
                                 <h1 className="font-bold text-xl text-black mt-5">
-                                    {item?.categoryName}
+                                    {t(item?.categoryName)}
                                 </h1>
                             </div>
                             <div className="pb-12 px-10">

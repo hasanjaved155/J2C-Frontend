@@ -77,11 +77,12 @@ const CoursePlaylist = ({ path, folderId }) => {
     };
 
     const renderContent = () => {
-        const videoCardClass = 'p-4 border-b-2 border-blue-300 text-lg hover:text-xl hover:bg-gradient-to-r from-blue-300 to-blue-200 cursor-pointer';
+        const videoCardClass = 'p-4 border-b border-zinc-300 text-base hover:scale-[1.01] hover:bg-neutral-100 cursor-pointer transition-all duration-200';
         const videoNameClass = 'font-medium flex justify-between';
 
         return (
             <>
+
                 {displayedVideos.map((video) => (
                     <div key={video?.id} className={videoCardClass} onClick={() => handleVideoSelect(video)}>
                         <div className={videoNameClass}>
@@ -95,7 +96,7 @@ const CoursePlaylist = ({ path, folderId }) => {
                 {visibleCount < videos.length && (
                     <button
                         onClick={handleLoadMore}
-                        className="mt-4 w-full text-black border-2 border-black px-4 py-2 rounded-lg hover:bg-slate-500 hover:text-white"
+                        className="mt-4 w-full text-black border border-black px-2 sm:px-4 py-2 rounded hover:bg-neutral-100 text-lg transition-all duration-300"
                     >
                         View More
                     </button>
@@ -107,7 +108,7 @@ const CoursePlaylist = ({ path, folderId }) => {
     return (
         <div className="rounded-xl mt-3">
             <div className="w-full">
-                <div className="p-6 h-full border-2">
+                <div className="p-1 sm:p-6 h-full border-2">
                     <div className="bg-white h-full rounded-lg text-center text-2xl">
                         {loading ? <div>Loading...</div> : error ? <div>{error}</div> : renderContent()}
                     </div>

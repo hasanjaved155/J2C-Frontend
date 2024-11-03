@@ -17,6 +17,9 @@ import { useUser } from "../Contexts/UserContext";
 import { useCart } from "../Contexts/CartContext";
 import CategoryShow from "../HomePage/CategoryShow";
 import { useRemain } from "../Contexts/RemainingContext";
+import i18n from '../Language/i18n';
+import LanguageSelector from "../Language/LanguageSelector";
+import TranslateComponent from "../Translate/TranslateComponent";
 
 const Navbar = ({ searchTerm, setSearchTerm }) => {
     const { isInstructor, setInstructor } = useRemain();
@@ -35,6 +38,12 @@ const Navbar = ({ searchTerm, setSearchTerm }) => {
     const user = JSON.parse(localStorage.getItem("user"));
 
     const [showSubcategories, setShowSubcategories] = useState(false);
+
+
+    useEffect(() => {
+        const savedLanguage = localStorage.getItem('language') || 'en';
+        i18n.changeLanguage(savedLanguage);
+    }, []);
 
     // const role = JSON.parse(localStorage.getItem('role'));
 
@@ -403,6 +412,10 @@ const Navbar = ({ searchTerm, setSearchTerm }) => {
                                     </span>
                                 </div>
 
+
+
+
+
                                 {!localStorage.getItem("accessToken") ? (
                                     <div className="flex space-x-4">
                                         <Link
@@ -517,7 +530,10 @@ const Navbar = ({ searchTerm, setSearchTerm }) => {
                                                             Refresh Token
                                                         </div>
                                                     </li>
+
+
                                                 </ul>
+
                                             )}
                                         </div>
                                     </div>
